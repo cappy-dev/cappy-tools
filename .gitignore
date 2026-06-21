@@ -1,0 +1,4 @@
+*.gguf
+*.bin
+results.json
+__pycache__/
