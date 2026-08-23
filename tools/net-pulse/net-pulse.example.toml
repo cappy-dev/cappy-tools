@@ -1,0 +1,38 @@
+# Example net-pulse config file.
+# Copy to /etc/net-pulse.toml and edit to taste.
+# Only a small TOML subset is supported: key=value lines and [[targets]] tables.
+
+# Thresholds (crossing any of these marks a target unhealthy).
+latency_warn_ms = 250
+speed_warn_mbps = 1.0
+
+# Per-probe timeouts (seconds).
+ping_timeout_sec = 1
+dns_timeout_sec = 3
+http_timeout_sec = 8
+
+[[targets]]
+host = "1.1.1.1"
+label = "Cloudflare Anycast DNS"
+type = "ping"
+
+[[targets]]
+host = "8.8.8.8"
+label = "Google Public DNS"
+type = "ping"
+
+[[targets]]
+host = "github.com"
+label = "GitHub DNS resolution"
+type = "dns"
+resolve = "github.com"
+
+[[targets]]
+url = "https://www.example.com"
+label = "Example.com homepage"
+type = "http"
+
+[[targets]]
+url = "https://speed.cloudflare.com/__down?bytes=1000000"
+label = "Cloudflare 1MB download"
+type = "speed"

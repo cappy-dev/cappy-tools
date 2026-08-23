@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.pyo
+*.html
+report.html
+disk-report.html

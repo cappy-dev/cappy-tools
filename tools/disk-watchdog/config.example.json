@@ -1,0 +1,22 @@
+{
+  "usage_warn": 80,
+  "usage_crit": 92,
+  "smart_check": true,
+  "smart_fail_values": {
+    "Reallocated_Sector_Ct": 0,
+    "Current_Pending_Sector": 0,
+    "Offline_Uncorrectable": 0
+  },
+  "ignore_fs_types": [
+    "tmpfs", "devtmpfs", "squashfs", "overlay", "fuse.snapraid",
+    "proc", "sysfs", "cgroup", "cgroup2"
+  ],
+  "ignore_mount_prefixes": ["/var/lib/docker/overlay2"],
+  "quiet_when_ok": true,
+  "alerts": {
+    "log":     {"enabled": true,  "path": "/var/log/disk-watchdog.log"},
+    "webhook": {"enabled": false, "method": "POST", "url": "https://hooks.example.com/services/XXX"},
+    "email":   {"enabled": false, "smtp_host": "localhost", "smtp_port": 25, "to": "admin@example.com"},
+    "command": {"enabled": false, "exec": "/usr/local/bin/disk-watchdog-hook.sh"}
+  }
+}

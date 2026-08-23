@@ -1,0 +1,23 @@
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), deny (forwarded)
+New profiles: skipped
+
+To                         Action      From
+--                         ----        ----
+22/tcp                     ALLOW IN    Anywhere
+22/tcp (v6)                ALLOW IN    Anywhere (v6)
+23/tcp                     ALLOW IN    Anywhere
+80/tcp                     ALLOW IN    Anywhere
+80/tcp (v6)               ALLOW IN    Anywhere (v6)
+443/tcp                    ALLOW IN    Anywhere
+443/tcp (v6)               ALLOW IN    Anywhere (v6)
+3306/tcp                   ALLOW IN    Anywhere
+3306/tcp (v6)              ALLOW IN    Anywhere (v6)
+22/tcp                     ALLOW IN    Anywhere
+5432/tcp                   ALLOW IN    10.0.0.0/8
+6379/tcp                   ALLOW IN    192.168.1.5
+8080/tcp                   ALLOW IN    Anywhere
+Anywhere                   ALLOW IN    203.0.113.9
+9999/tcp                   DENY IN     Anywhere
+5353/udp                   ALLOW IN    192.168.1.0/24

@@ -1,0 +1,16 @@
+# Config files with real settings
+*.local.json
+disk-watchdog.json
+!config.example.json
+
+# Output and logs
+*.log
+status.html
+__pycache__/
+*.pyc
+*.pyo
+
+# Backups
+backups/
+*.bak
+*.tmp

@@ -1,0 +1,13 @@
+Status: active
+Logging: on (medium)
+Default: deny (incoming), allow (outgoing), deny (forwarded)
+IPv6: yes
+
+To                         Action      From
+--                         ----        ----
+22/tcp                     LIMIT IN    Anywhere
+22/tcp (v6)                LIMIT IN    Anywhere (v6)
+80/tcp                     ALLOW IN    Anywhere
+80/tcp (v6)               ALLOW IN    Anywhere (v6)
+443/tcp                    ALLOW IN    Anywhere
+443/tcp (v6)               ALLOW IN    Anywhere (v6)

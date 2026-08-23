@@ -1,0 +1,52 @@
+// Example tailnet ACL file for testing tailscale_acl_audit.py.
+// This file deliberately contains a few issues so the audit finds them.
+
+{
+  // autoAdmin is convenient for small tailnets but risky otherwise.
+  autoAdmin: true,
+
+  tagOwners: {
+    "tag:web": ["group:eng"],
+    "tag:db":  ["group:eng"],
+    // tag:public can be claimed by anyone. not great.
+    "tag:public": ["*"],
+  },
+
+  groups: {
+    "group:eng": ["alice@example.com", "bob@example.com"],
+  },
+
+  acls: [
+    // Accept SSH from eng to web.
+    { action: "accept", src: ["group:eng"], dst: ["tag:web:22"] },
+
+    // Duplicate of the rule above._acl audit will flag this.
+    { action: "accept", src: ["group:eng"], dst: ["tag:web:22"] },
+
+    // Accept from anywhere to everything. flags ACL003.
+    { action: "accept", src: ["*"], dst: ["*"] },
+
+    // A reject rule that should perhaps have a reason.
+    { action: "reject", src: ["*"], dst: ["tag:db:5432"] },
+
+    // Empty dst. almost certainly a typo.
+    { action: "accept", src: ["group:eng"], dst: [] },
+
+    // References a tag that is not defined in tagOwners.
+    { action: "accept", src: ["group:eng"], dst: ["tag:prod:443"] },
+
+    // A reject rule placed after an earlier accept rule. shadowed.
+    { action: "accept", src: ["group:eng"], dst: ["tag:web:80"] },
+    { action: "reject", src: ["group:eng"], dst: ["tag:web:80"] },
+  ],
+
+  ssh: [
+    // No 'close' duration check. the audit will warn about this.
+    { action: "accept", src: ["group:eng"], dst: ["tag:web"], users: ["root"] },
+  ],
+
+  grants: [
+    // A grant with a wildcard destination. very broad.
+    { app: "tailscale/ssh", src: ["group:eng"], dst: ["*"] },
+  ],
+}

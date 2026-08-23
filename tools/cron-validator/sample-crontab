@@ -1,0 +1,15 @@
+# sample crontab to validate
+# Run: python3 cron_validator.py --file sample-crontab
+# Comments and environment-assignment lines are skipped automatically.
+
+# Every 5 minutes, every day
+*/5 * * * * /usr/local/bin/check.sh
+
+# 4am on the first of every month
+0 4 1 * * /usr/local/bin/monthly.sh
+
+# 9am weekdays (Mon-Fri)
+0 9 * * 1-5 /usr/local/bin/cron-job.sh
+
+# Every Sunday at midnight
+0 0 * * 0 /usr/local/bin/weekly.sh

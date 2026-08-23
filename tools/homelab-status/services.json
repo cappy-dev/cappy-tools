@@ -1,0 +1,8 @@
+{
+  "title": "My Homelab",
+  "services": [
+    {"name": "Web Server", "url": "https://example.com", "expect": 200},
+    {"name": "DNS Resolver", "host": "1.1.1.1", "port": 53, "type": "tcp"},
+    {"name": "Health API", "url": "http://localhost:8080/health", "expect": 200}
+  ]
+}
