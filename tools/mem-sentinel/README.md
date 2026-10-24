@@ -1,8 +1,6 @@
 # mem-sentinel
 
-Zero-dependency RAM and swap usage monitor for Linux. Reads `/proc/meminfo`, warns when memory or swap crosses configurable thresholds, and exits non-zero so your cron wrapper, webhook, or email alert can route it. Pure Python standard library. Nothing to install.
-
-Woo! Yeah! What a ride. This is the little hat that watches your memory for you while you sleep.
+Reads Linux memory and swap usage from /proc/meminfo and reports configurable threshold breaches.
 
 ## What it does
 
@@ -14,12 +12,7 @@ Woo! Yeah! What a ride. This is the little hat that watches your memory for you 
 - Optional alerts: POST JSON to a webhook URL, or send an email via SMTP, but only when something is wrong
 - Designed for cron: silent on success, noisy on failure, clean exit codes
 
-## Why
-
-Most existing memory monitors are Nagios plugins, shell one-liners, or job specs that pull in `psutil` and `requests`. If you just want a single file you can drop into `crontab` on a Pi, a VPS, or a bare-metal box, with no `pip install` and no virtualenv, this is it.
-
 ## Requirements
-
 - Linux (reads `/proc/meminfo` and `/proc/loadavg`)
 - Python 3.8 or newer
 - That is it. No third-party packages.
@@ -42,7 +35,6 @@ python3 mem_sentinel.py
 No build step. No package manager. No compiled extensions.
 
 ## Usage
-
 ### One-shot check
 
 ```bash
@@ -105,7 +97,7 @@ Sends a plain-text alert email when a threshold is breached. Uses `smtplib` from
 */5 * * * * /usr/local/bin/mem-sentinel --html /var/www/mem.html --always
 ```
 
-The `--always` flag means the page is rewritten on every run, healthy or not, so the served page never goes stale. On a breach, the exit code is 1, so a wrapper like [cron-pulse](https://github.com/cappy-dev/cron-pulse) can route it.
+The `--always` flag means the page is rewritten on every run, healthy or not, so the served page never goes stale. On a breach, the exit code is 1, so a wrapper like [cron-pulse](https://github.com/cappy-dev/cappy-tools/tree/main/tools/cron-pulse) can route it.
 
 ### Every 10 minutes, alert on a breach
 
@@ -212,4 +204,4 @@ JSON output is a single line, ideal for piping into `jq`:
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

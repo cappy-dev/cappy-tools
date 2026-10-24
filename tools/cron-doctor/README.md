@@ -1,16 +1,8 @@
-# cron_doctor
+# cron-doctor
 
-Audit crontab files for common problems and mistakes. A zero-dependency Python
-tool that checks crontab entries for syntax errors, commands that reference
-missing executables, overlapping schedules, disabled jobs, and other common
-gotchas that silently break cron jobs.
-
-Cron is a silent killer. A misplaced comma, an unescaped percent sign, or a
-command not on the minimal PATH produces no error and no output. cron_doctor
-catches these before they bite you.
+Checks crontab files for syntax errors, missing commands, overlapping schedules, and disabled jobs.
 
 ## Features
-
 - Validates all five schedule fields (minute, hour, day-of-month, month, day-of-week)
 - Checks for out-of-bounds values, reversed ranges, and invalid names
 - Detects commands that reference executables not on PATH
@@ -24,23 +16,21 @@ catches these before they bite you.
 - Python 3.8+
 
 ## Installation
-
 No install needed. Just download the single file and run it:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/cron-doctor/main/cron_doctor.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/cron-doctor/cron_doctor.py
 chmod +x cron_doctor.py
 ```
 
 Or clone the repo:
 
 ```bash
-git clone https://github.com/cappy-dev/cron-doctor.git
-cd cron-doctor
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/cron-doctor
 ```
 
-## Quick Start
-
+## Quick start
 Check your current user crontab:
 
 ```bash
@@ -66,7 +56,6 @@ echo "0 2 * * * /bin/backup" | python3 cron_doctor.py
 ```
 
 ## Usage
-
 ```
 usage: cron_doctor [-h] [-f FILE | --system] [--json] [--quiet] [--no-color] [--version]
 
@@ -86,7 +75,6 @@ option is given.
 ```
 
 ## Examples
-
 ### Find a typo in a schedule field
 
 ```bash
@@ -208,7 +196,6 @@ python3 /path/to/cron_doctor.py --file crontab.txt --quiet --no-color
 A non-zero exit code from errors will fail the pipeline step.
 
 ## Limitations
-
 cron_doctor performs static analysis. It does not execute commands, check
 whether a job would actually fire at a given time, or validate shell syntax
 inside the command string. It checks whether the base executable is on PATH
@@ -217,4 +204,4 @@ environment cron will use at runtime.
 
 ## License
 
-MIT License. See LICENSE file for details.
+AGPL-3.0. See the [root license](../../LICENSE).

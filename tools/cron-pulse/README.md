@@ -1,13 +1,8 @@
 # cron-pulse
 
-Zero-dependency cron job heartbeat monitor for Linux. A single Python script with no external packages required.
-
-cron-pulse keeps a pulse on your scheduled tasks. Each job sends a short "I ran" heartbeat from inside its crontab entry. cron-pulse then checks that every job actually fired within its expected window. When a job goes silent, cron-pulse exits non-zero so a wrapper entry, systemd timer, or external scheduler can raise the alarm.
-
-Nothing is sent anywhere on its own. You decide what happens when a job is late or dead.
+Records job heartbeats and reports scheduled jobs that missed their expected window.
 
 ## Features
-
 - **Zero dependencies.** Runs on Python 3.8 or newer using only the standard library.
 - **Two commands.** `record` from inside your crontab, `check` from a wrapper cron line or systemd timer.
 - **Grace windows.** Each job declares its expected interval and an extra grace period before it counts as late.
@@ -20,7 +15,7 @@ Nothing is sent anywhere on its own. You decide what happens when a job is late 
 Copy the script onto your machine and make it executable:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/cron-pulse/main/cron-pulse.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/cron-pulse/cron-pulse.py
 chmod +x cron-pulse.py
 sudo mv cron-pulse.py /usr/local/bin/cron-pulse
 ```
@@ -28,8 +23,8 @@ sudo mv cron-pulse.py /usr/local/bin/cron-pulse
 Or just clone the repo:
 
 ```bash
-git clone https://github.com/cappy-dev/cron-pulse.git
-cd cron-pulse
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/cron-pulse
 chmod +x cron-pulse.py
 ```
 
@@ -142,9 +137,9 @@ cron-pulse purge                # clear everything
 
 Each heartbeat stores the interval you declared plus a grace period. The budget for a job is `interval + grace`.
 
-- **ok**: time since last heartbeat is within the budget.
-- **late**: time since last heartbeat is past the budget but under three times the budget.
-- **dead**: time since last heartbeat is past three times the budget. The job has been silent long enough that something is very wrong.
+- ok. time since last heartbeat is within the budget.
+- late. time since last heartbeat is past the budget but under three times the budget.
+- dead. time since last heartbeat is past three times the budget. The job has been silent long enough that something is very wrong.
 
 A job that has never sent a heartbeat is reported once it appears in state with a zero last-seen time.
 
@@ -160,10 +155,8 @@ By default, heartbeat data is written to `~/.cron-pulse/state.json`. Override th
 - **Pipe to mail.** `cron-pulse check || mail -s "cron alert" admin@example` sends the failure summary to your inbox.
 - **Lock with flock.** If your caretaker job might run slowly, wrap it in `flock -n /tmp/cron-pulse.lock` to avoid overlaps.
 
-## License
-
-MIT
-
 ## Contributing
 
-Issues and pull requests are welcome at https://github.com/cappy-dev/cron-pulse.
+## License
+
+AGPL-3.0. See the [root license](../../LICENSE).

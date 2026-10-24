@@ -1,13 +1,8 @@
-SSH Key Security Auditor
-========================
+# ssh-key-audit
 
-Description
------------
-A zero-dependency Python tool that audits SSH configurations for security vulnerabilities. 
-Checks authorized_keys files, SSH client config, and SSH daemon config for common security issues.
+Audits authorized keys, SSH client configuration, and SSH daemon settings for common security problems.
 
-Features
---------
+## Features
 - Zero dependencies (uses only Python standard library)
 - Checks for weak key types (ssh-dss, ssh-rsa1, etc)
 - Detects duplicate keys in authorized_keys
@@ -19,9 +14,8 @@ Features
 Installation
 ------------
 1. Clone the repository:
-   git clone https://github.com/cappy-dev/ssh-key-audit.git
-   cd ssh-key-audit
-
+   git clone https://github.com/cappy-dev/cappy-tools.git
+   cd cappy-tools/tools/ssh-key-audit
 2. Make the script executable:
    chmod +x ssh-key-audit.py
 
@@ -92,6 +86,6 @@ Security notes
 - Review HTML report for detailed findings
 - Never run as root for routine checks unless necessary
 
-License
--------
-MIT License - see LICENSE file for details
+## License
+
+AGPL-3.0. See the [root license](../../LICENSE).

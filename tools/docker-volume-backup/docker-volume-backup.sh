@@ -33,7 +33,7 @@
 #
 # See README.md for examples and integration tips.
 #
-# License: MIT
+# License: AGPL-3.0
 
 set -euo pipefail
 

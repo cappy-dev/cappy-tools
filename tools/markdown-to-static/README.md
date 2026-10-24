@@ -1,6 +1,6 @@
 # markdown-to-static
 
-Minimal Python static site generator. Reads Markdown files, converts them to HTML with a template, and writes the output to a build directory. Zero dependencies beyond the Python standard library.
+Converts Markdown files to HTML using a template and writes them to a build directory.
 
 ## What it does
 
@@ -14,10 +14,9 @@ Minimal Python static site generator. Reads Markdown files, converts them to HTM
 No pip packages required. Uses only the Python standard library.
 
 ## Installation
-
 ```bash
-git clone https://github.com/cappy-dev/markdown-to-static.git
-cd markdown-to-static
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/markdown-to-static
 chmod +x mds.py
 ```
 
@@ -213,4 +212,4 @@ Most static site generators need Node.js, Ruby, or a long list of Python package
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

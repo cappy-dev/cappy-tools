@@ -1,30 +1,8 @@
 # docker-prune-cron
 
-A tiny, zero-dependency Python script that prunes Docker layers safely and
-on a schedule. It runs the right `docker ... prune` commands for you, prints
-cron-friendly log lines, writes an HTML report, and exits with a status code
-that tells you whether everything worked.
-
-Made for homelab operators who let Docker eat disk space for weeks and then
-wonder where 40 GB went.
-
-## Why
-
-`docker system prune -a --volumes` is a sledgehammer. It can remove images you
-wanted to keep, nuke named volumes with real data, and gives you no record of
-what happened. `docker-prune-cron` is calmer:
-
-- **Dry run by default.** Nothing is deleted unless you pass `--apply`.
-- **Age filters.** Keep images and stopped containers newer than N hours. Only
-  older junk gets reclaimed.
-- **Volumes are opt-in to delete.** Use `--no-volumes` to never touch them.
-- **HTML report.** Drop the generated file somewhere web-served and glance at
-  it from your phone.
-- **Cron exit codes.** `0` clean, `1` partial failure, `2` Docker unreachable,
-  `3` bad args. Wire this straight into your alerting.
+Runs scheduled Docker cleanup commands, writes an HTML report, and returns a monitoring exit code.
 
 ## Requirements
-
 - Python 3.8 or newer (standard library only).
 - The `docker` CLI installed and on your `PATH`.
 - A reachable Docker daemon. The script checks this before doing anything.
@@ -32,12 +10,11 @@ what happened. `docker-prune-cron` is calmer:
 No pip installs, no virtualenv, no containers required.
 
 ## Installation
-
 Drop the single script somewhere on your `PATH` and make it executable:
 
 ```bash
 sudo curl -fsSL -o /usr/local/bin/docker-prune-cron \
-  https://raw.githubusercontent.com/cappy-dev/docker-prune-cron/main/docker_prune_cron.py
+  https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/docker-prune-cron/docker_prune_cron.py
 sudo chmod +x /usr/local/bin/docker-prune-cron
 docker-prune-cron --version
 ```
@@ -45,13 +22,12 @@ docker-prune-cron --version
 Or clone it if you prefer:
 
 ```bash
-git clone https://github.com/cappy-dev/docker-prune-cron.git
-cd docker-prune-cron
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/docker-prune-cron
 python3 docker_prune_cron.py --help
 ```
 
 ## Usage
-
 See what WOULD be pruned, delete nothing:
 
 ```bash
@@ -143,4 +119,4 @@ or serve the folder to check results from anywhere.
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

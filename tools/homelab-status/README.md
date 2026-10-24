@@ -1,6 +1,6 @@
 # homelab-status
 
-A tiny Python script that checks your self-hosted services are up and generates a clean HTML status page. No dependencies beyond the Python standard library.
+Checks HTTP endpoints and TCP ports, then writes a self-contained HTML status page.
 
 ## What it does
 
@@ -10,16 +10,14 @@ A tiny Python script that checks your self-hosted services are up and generates 
 - Zero external dependencies, just Python 3.7+
 
 ## Installation
-
 ```bash
-git clone https://github.com/cappy-dev/homelab-status.git
-cd homelab-status
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/homelab-status
 ```
 
 No pip install needed. The script uses only standard library modules.
 
 ## Usage
-
 1. Copy the example config and edit it for your services:
 
 ```bash
@@ -47,7 +45,6 @@ python3 homelab_status.py --config /path/to/my-services.json
 Wait, that is not implemented yet. For now, just put `services.json` in the same folder as the script, or symlink it.
 
 ## Configuration
-
 Create a `services.json` file in the same directory as the script:
 
 ```json
@@ -69,7 +66,7 @@ Create a `services.json` file in the same directory as the script:
 - **url** (for HTTP checks): Full URL to check. The script makes a HEAD (HTTPS) or GET (HTTP) request and compares the status code against `expect`
 - **expect** (optional, default 200): Expected HTTP status code
 - **host** + **port** (for TCP checks): Hostname or IP and port number. The script tries to open a TCP connection and reports whether the port is open
-- **type**: Set to `"tcp"` for TCP checks. Not required for HTTP checks
+- type. Set to `"tcp"` for TCP checks. Not required for HTTP checks
 
 ## Automation
 
@@ -97,4 +94,4 @@ Most self-hosted status tools are full web apps with databases and containers. S
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # cross-shell-prompt: a clean, informative shell prompt for bash and zsh
-# http://github.com/cappy-dev/cross-shell-prompt
+# https://github.com/cappy-dev/cappy-tools/tree/main/tools/cross-shell-prompt
 #
 # Zero dependencies. Uses only built-in shell features.
 # Features:

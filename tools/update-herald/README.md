@@ -1,9 +1,8 @@
 # update-herald
 
-A zero-dependency Python tool that checks for available package updates and security patches on your Linux system. Reports total available updates, flags security updates, and can send notifications to webhooks, files, or shell commands. Perfect for cron jobs, homelab monitoring, and CI pipelines.
+Reports available Linux package updates and security patches, with configurable notifications.
 
 ## Features
-
 - Supports apt (Debian/Ubuntu), dnf (Fedora/RHEL), and pacman (Arch)
 - Detects security updates and flags them separately
 - Multiple output formats: plain text or JSON
@@ -15,12 +14,11 @@ A zero-dependency Python tool that checks for available package updates and secu
 - Friendly exit codes for scripting and cron use
 
 ## Installation
-
 Clone the repository and copy the script somewhere on your PATH:
 
 ```bash
-git clone https://github.com/cappy-dev/update-herald.git
-cd update-herald
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/update-herald
 chmod +x update_herald.py
 sudo cp update_herald.py /usr/local/bin/update-herald
 ```
@@ -34,13 +32,11 @@ python3 update_herald.py
 No virtual environment needed. update-herald uses only the Python standard library.
 
 ### Requirements
-
 - Python 3.8 or newer
 - A supported package manager: apt, dnf, or pacman
 - Root or sudo access may be required to refresh package lists depending on your system configuration
 
 ## Usage
-
 Run a basic check and print the report to the terminal:
 
 ```bash
@@ -164,10 +160,10 @@ The webhook is sent as an HTTP POST with Content-Type application/json. The body
 
 update-herald runs read-only package checks whenever possible. On some systems, refreshing the package index requires sudo. The tool attempts a non-interactive sudo refresh (`sudo -n apt update` or similar) only if the initial read fails. For production use, configure passwordless sudo for the relevant update commands if you want automatic index refresh.
 
-## License
-
-MIT License. See the LICENSE file for full text.
-
 ## Contributing
 
 This is a small utility script kept intentionally lightweight. If you want to add support for another package manager (zypper, emerge, or anything else), open a pull request. Keep changes dependency-free and focused on the single script.
+
+## License
+
+AGPL-3.0. See the [root license](../../LICENSE).

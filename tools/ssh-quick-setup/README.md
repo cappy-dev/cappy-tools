@@ -1,16 +1,16 @@
 # ssh-quick-setup
 
-A single shell script to generate SSH keys, deploy them to remote hosts, and harden the local SSH daemon. Zero dependencies beyond bash and coreutils.
+Generates SSH keys, deploys public keys to remote hosts, and applies SSH daemon hardening settings. Review the settings before applying them.
 
 ## What it does
 
-- **keygen**: Generates a strong Ed25519 key pair with 100 key derivation rounds
-- **deploy**: Copies your public key to a remote host via SSH pipe
-- **harden**: Locks down sshd_config (disables password auth, restricts root login, sets modern algorithms)
-- **status**: Shows a quick summary of SSH configuration, keys, and backups
-- **rollback**: Restores sshd_config from the most recent backup
-- **dry-run**: Preview every change before committing to it
-- **custom port**: Optionally relocate the SSH listening port during hardening
+- keygen. Generates a strong Ed25519 key pair with 100 key derivation rounds
+- deploy. Copies your public key to a remote host via SSH pipe
+- harden. Locks down sshd_config (disables password auth, restricts root login, sets modern algorithms)
+- status. Shows a quick summary of SSH configuration, keys, and backups
+- rollback. Restores sshd_config from the most recent backup
+- dry-run. Preview every change before committing to it
+- custom port. Optionally relocate the SSH listening port during hardening
 
 No pip packages, no Node, no extra dependencies. Just Bash.
 
@@ -23,8 +23,8 @@ Tested on Debian, Ubuntu, Fedora, RHEL/Rocky/Alma, and Arch. Any Linux system wi
 Clone and make it executable:
 
 ```bash
-git clone https://github.com/cappy-dev/ssh-quick-setup.git
-cd ssh-quick-setup
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/ssh-quick-setup
 chmod +x ssh-quick-setup.sh
 ```
 
@@ -91,7 +91,6 @@ Prints the effective values of every security-relevant directive, lists your SSH
 - `--help, -h`: Show help text
 
 ## Examples
-
 ### Generate a key with a custom comment
 
 ```bash
@@ -141,10 +140,10 @@ Restores the most recent backup from `/etc/ssh/backups/` and reloads sshd.
 
 ## Safety features
 
-- **Automatic backup**: Before hardening, the script copies `sshd_config` to `/etc/ssh/backups/sshd_config.<timestamp>.bak`
-- **Syntax validation**: After editing, the script runs `sshd -t` to check config syntax. If it fails, the original config is restored immediately
-- **Your session stays open**: The script reloads the service instead of restarting, so your active SSH session is never dropped
-- **Dry-run everywhere**: Every command respects `--dry-run`, so you can inspect the full plan beforehand
+- Automatic backup. Before hardening, the script copies `sshd_config` to `/etc/ssh/backups/sshd_config.<timestamp>.bak`
+- Syntax validation. After editing, the script runs `sshd -t` to check config syntax. If it fails, the original config is restored immediately
+- Your session stays open. The script reloads the service instead of restarting, so your active SSH session is never dropped
+- Dry-run everywhere. Every command respects `--dry-run`, so you can inspect the full plan beforehand
 
 ## Security notes
 
@@ -159,4 +158,4 @@ After hardening:
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

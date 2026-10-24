@@ -1,20 +1,6 @@
 # docker-volume-backup
 
-A small, dependency-light backup tool for Docker named volumes. It dumps each
-volume to a gzip-compressed tar archive using a throwaway `busybox` container,
-writes a SHA-256 checksum next to every archive, and optional containers from a
-Docker Compose project while the snapshot is taken.
-
-Everything you need is `docker`, `tar`, `gzip` and `sha256sum`, which ship with
-every mainstream Linux distribution. No Python, no cron daemon, no extra
-back-end.
-
-## Why
-
-Named volumes are the right place to put data a container must own, but they are
-invisible to the host filesystem and easy to forget in a backup plan. This
-script makes a clean, restorable snapshot of any volume with one command and
-keeps the last N copies for you so the disk does not fill up.
+Archives Docker named volumes with checksums and optional Docker Compose coordination.
 
 ## Install
 
@@ -22,15 +8,14 @@ keeps the last N copies for you so the disk does not fill up.
 2. Clone or copy the single script.
 
 ```
-git clone https://github.com/cappy-dev/docker-volume-backup.git
-cd docker-volume-backup
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/docker-volume-backup
 chmod +x docker-volume-backup.sh
 ```
 
 There is nothing to build or install. Run it from anywhere.
 
 ## Usage
-
 ```
 ./docker-volume-backup.sh [options] <volume> [<volume> ...]
 ```
@@ -47,7 +32,6 @@ Options:
 - `-h`           Show the built-in help
 
 ## Examples
-
 Back up one volume to the default directory:
 
 ```
@@ -125,7 +109,6 @@ The retention pass keeps the N newest archives per volume (based on file mtime)
 and deletes both the archive and its `.sha256` sidecar for anything older.
 
 ## Limitations
-
 - Backs up named volumes only, not bind mounts or anonymous volumes.
 - An entire volume is snapshotted each run. There is no incremental mode.
 - The busybox image is pulled on first use; the host must reach a registry.
@@ -134,4 +117,4 @@ and deletes both the archive and its `.sha256` sidecar for anything older.
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

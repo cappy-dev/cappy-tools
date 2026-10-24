@@ -1,15 +1,8 @@
 # cert-clock
 
-Zero-dependency X.509 / TLS certificate expiry monitor written in pure
-Python (standard library only). Check how many days are left on TLS
-certificates by connecting to remote hosts or by reading local PEM files.
-Designed to run from cron with machine-friendly exit codes so you can wire
-it into monitoring, alerting, or deployment pipelines.
-
-No `pip install`. No virtualenv. No third-party packages. Just one file.
+Checks TLS certificate expiration dates from remote hosts or local PEM files. Uses Python standard-library modules and returns exit codes for monitoring.
 
 ## Features
-
 - Check remote hosts over TLS (any port, defaults to 443).
 - Check local PEM files, including fullchain bundles with multiple certs.
 - Configurable warning and critical thresholds in days.
@@ -23,18 +16,16 @@ No `pip install`. No virtualenv. No third-party packages. Just one file.
 - Tabular output with a human-readable summary line.
 
 ## Requirements
-
 - Python 3.9 or newer.
 - OpenSSL (via the `ssl` standard library module). Shipped with Python.
 
 Nothing else.
 
 ## Installation
-
 Copy the script onto your machine:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/cappy-dev/cert-clock/main/cert_clock.py \
+curl -fsSL https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/cert-clock/cert_clock.py \
   -o /usr/local/bin/cert-clock
 chmod +x /usr/local/bin/cert-clock
 ```
@@ -42,15 +33,14 @@ chmod +x /usr/local/bin/cert-clock
 Or clone the repo:
 
 ```sh
-git clone https://github.com/cappy-dev/cert-clock.git
-cd cert-clock
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/cert-clock
 python3 cert_clock.py --help
 ```
 
 No build step. No install step. Just run it.
 
 ## Usage
-
 ```
 cert-clock [--host HOST[:PORT] ...] [--file PATH ...]
            [--warn DAYS] [--critical DAYS]
@@ -84,7 +74,6 @@ Run `python3 cert_clock.py --help` for the full help text.
 - `ERROR` the check itself failed (DNS, TLS, missing file, parse error).
 
 ## Examples
-
 Check a single remote host:
 
 ```sh
@@ -197,4 +186,4 @@ certificate parsing leans on `ssl`, which is bundled with CPython.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

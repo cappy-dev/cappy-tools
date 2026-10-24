@@ -1,13 +1,8 @@
 # disk-xray
 
-Zero-dependency disk usage analyzer for Linux. Scans directories and shows the
-biggest space hogs in a clean tree view, plus an optional HTML report. Pure
-Python standard library, no pip, no virtualenv.
-
-Part of the cappy-dev homelab toolkit.
+Reports directory sizes and large files in a terminal tree or an HTML report. Uses the Python standard library.
 
 ## Features
-
 - Fast tree view of directories ranked by size, with proportional bars
 - Shows the largest individual files in the scanned tree
 - Optional HTML report with sortable-style tables and progress bars
@@ -50,11 +45,10 @@ Top 10 largest individual files:
 ```
 
 ## Installation
-
 No installation needed. Just download the single script and run it.
 
 ```sh
-curl -LO https://github.com/cappy-dev/disk-xray/raw/main/disk_xray.py
+curl -LO https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/disk-xray/disk_xray.py
 chmod +x disk_xray.py
 ./disk_xray.py --help
 ```
@@ -62,13 +56,12 @@ chmod +x disk_xray.py
 Or clone the repo:
 
 ```sh
-git clone https://github.com/cappy-dev/disk-xray.git
-cd disk-xray
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/disk-xray
 python3 disk_xray.py .
 ```
 
 ## Usage
-
 ```
 usage: disk-xray [-h] [-n TOP] [-d DEPTH] [-f BIG_FILES] [-L]
                  [--count-hardlinks] [-i IGNORE] [--threshold THRESHOLD]
@@ -102,7 +95,6 @@ options:
 ```
 
 ## Examples
-
 Scan the home directory, show top 15 directories, drill 4 levels deep:
 
 ```sh
@@ -182,4 +174,4 @@ the standard library. Nothing else.
 
 ## License
 
-MIT License. See LICENSE file.
+AGPL-3.0. See the [root license](../../LICENSE).

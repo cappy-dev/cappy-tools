@@ -1,11 +1,8 @@
 # log-shark
 
-Zero-dependency log analyzer for common log formats. Parses syslog, journalctl JSON, nginx access logs, and Apache access logs, then surfaces a quick summary: top client IPs, HTTP status code breakdowns, error spikes, busiest endpoints, and more.
-
-Designed for quick SSH checks and cron jobs on homelab servers. No pip install, no virtualenv, no Docker. Just Python 3.8+ standard library.
+Summarizes syslog, journalctl JSON, Nginx, and Apache logs, including errors, client addresses, and HTTP status codes.
 
 ## Features
-
 - Parses four common log formats automatically (auto-detection per line)
 - **nginx combined** access logs (with referrer and user agent)
 - **Apache common** access logs
@@ -19,23 +16,21 @@ Designed for quick SSH checks and cron jobs on homelab servers. No pip install, 
 - 100% standard library, zero external dependencies
 
 ## Installation
-
 No install needed. Just download the script and make it executable:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/log-shark/main/log_shark.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/log-shark/log_shark.py
 chmod +x log_shark.py
 ```
 
 Or clone it:
 
 ```bash
-git clone https://github.com/cappy-dev/log-shark.git
-cd log-shark
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/log-shark
 ```
 
 ## Usage
-
 Analyze a single log file:
 
 ```bash
@@ -167,10 +162,9 @@ Sample JSON payload:
 Lines that do not match any known format are counted as unparsed but still appear in the summary total.
 
 ## Requirements
-
 - Python 3.8 or newer
 - No external packages required
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

@@ -1,18 +1,14 @@
 # llama-cpp-benchmark
 
-A lightweight Python benchmark runner for llama.cpp inference performance.
+Runs llama-cli against GGUF models and compares its reported timing measurements. Requires Python and a working llama.cpp build.
 
-Point it at your GGUF models and it runs llama-cli with each one, captures the built-in timing output, and prints a comparison table. No dependencies beyond Python 3 and a working llama.cpp build.
+## What it measures
+- Prompt eval speed. how fast the model processes the input prompt (tok/s)
+- Generation speed. how fast the model generates new tokens (tok/s)
+- Load time. how long the model takes to load from disk
+- Total time. end-to-end latency for the whole run
 
-## What It Measures
-
-- **Prompt eval speed**: how fast the model processes the input prompt (tok/s)
-- **Generation speed**: how fast the model generates new tokens (tok/s)
-- **Load time**: how long the model takes to load from disk
-- **Total time**: end-to-end latency for the whole run
-
-## Quick Start
-
+## Quick start
 ```bash
 # Make sure llama-cli is on your PATH (or set LLAMA_CPP_BIN)
 python3 bench.py --models ./models/*.gguf
@@ -96,11 +92,11 @@ No API calls, no server mode, no Python ML libraries. Just the raw llama.cpp bin
 
 ## Typical Use Cases
 
-- **Compare quantizations**: Q4_0 vs Q4_K_M vs Q8_0 vs F16, which is the best tradeoff?
-- **Tune thread count**: Is 4, 8, or 16 threads fastest on your CPU?
-- **CPU vs GPU**: Benchmark with and without `--gpu` to see the speedup
-- **Hardware upgrades**: Run before and after a RAM/CPU/GPU upgrade
-- **Regression testing**: Run the same benchmark after updating llama.cpp
+- Compare quantizations. Q4_0 vs Q4_K_M vs Q8_0 vs F16, which is the best tradeoff?
+- Tune thread count. Is 4, 8, or 16 threads fastest on your CPU?
+- CPU vs GPU. Benchmark with and without `--gpu` to see the speedup
+- Hardware upgrades. Run before and after a RAM/CPU/GPU upgrade
+- Regression testing. Run the same benchmark after updating llama.cpp
 
 ## Tips
 
@@ -111,11 +107,10 @@ No API calls, no server mode, no Python ML libraries. Just the raw llama.cpp bin
 - On laptops, plug in power and disable power saving for consistent results
 
 ## Requirements
-
 - Python 3.7+
 - llama.cpp compiled with `llama-cli` binary
 - GGUF model files to test
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

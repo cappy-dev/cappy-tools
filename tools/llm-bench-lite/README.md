@@ -1,24 +1,23 @@
 # llm-bench-lite
 
-Lightweight LLM inference benchmark. Measures time-to-first-token, tokens per second, and total latency for any OpenAI-compatible API. Zero dependencies beyond the Python standard library.
+Measures time to first token, tokens per second, and request latency for OpenAI-compatible APIs.
 
 ## What it does
 
-- **Time to first token (TTFT)**: Measures how fast the model starts responding (streaming mode)
-- **Tokens per second (TPS)**: Measures generation throughput
-- **Total latency**: End to end request time
-- **Multiple rounds**: Run each prompt several times for reliable averages
-- **Multiple models**: Compare models side by side in one run
-- **Provider shortcuts**: Built in shortcuts for OpenAI, Groq, Together, Fireworks, NVIDIA NIM, and local Ollama
-- **Export**: Save results as JSON or CSV for analysis
+- Time to first token (TTFT). Measures how fast the model starts responding (streaming mode)
+- Tokens per second (TPS). Measures generation throughput
+- Total latency. End to end request time
+- Multiple rounds. Run each prompt several times for reliable averages
+- Multiple models. Compare models side by side in one run
+- Provider shortcuts. Built in shortcuts for OpenAI, Groq, Together, Fireworks, NVIDIA NIM, and local Ollama
+- Export. Save results as JSON or CSV for analysis
 
 No pip packages required. Uses only the Python standard library.
 
 ## Installation
-
 ```bash
-git clone https://github.com/cappy-dev/llm-bench-lite.git
-cd llm-bench-lite
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/llm-bench-lite
 chmod +x llm_bench_lite.py
 ```
 
@@ -51,7 +50,6 @@ python3 llm_bench_lite.py --provider groq --model llama-3.1-8b
 ```
 
 ## Usage
-
 ```bash
 python3 llm_bench_lite.py [OPTIONS]
 python3 llm_bench_lite.py providers
@@ -79,7 +77,6 @@ python3 llm_bench_lite.py config --show
 - `config`: Manage your stored API key
 
 ## Examples
-
 ### Compare two models
 
 ```bash
@@ -191,4 +188,4 @@ Most LLM benchmarks are heavy frameworks with dozens of dependencies, complex co
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

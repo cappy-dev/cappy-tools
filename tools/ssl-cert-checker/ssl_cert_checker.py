@@ -31,7 +31,7 @@ from datetime import datetime, timezone
 DEFAULT_PORT = 443
 DEFAULT_WARNING_DAYS = 30
 CONNECT_TIMEOUT = 10
-DEFAULT_USER_AGENT = "ssl-cert-checker/1.0 (https://github.com/cappy-dev/ssl-cert-checker)"
+DEFAULT_USER_AGENT = "ssl-cert-checker/1.0 (https://github.com/cappy-dev/cappy-tools/tree/main/tools/ssl-cert-checker)"
 
 
 @dataclass

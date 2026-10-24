@@ -42,9 +42,9 @@ dev = [
 jmail = "jmail.cli:main"
 
 [project.urls]
-"Homepage" = "https://github.com/cappy-dev/jmail-client"
+"Homepage" = "https://github.com/cappy-dev/cappy-tools/tree/main/tools/jmail-client"
 "Documentation" = "https://jmail.world/docs"
-"Source" = "https://github.com/cappy-dev/jmail-client"
+"Source" = "https://github.com/cappy-dev/cappy-tools/tree/main/tools/jmail-client"
 "API Docs" = "https://jmail.world/docs/python-client"
 
 [tool.setuptools]

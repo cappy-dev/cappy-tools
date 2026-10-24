@@ -1,14 +1,8 @@
 # ssl-cert-checker
 
-A tiny command line tool that checks the TLS/SSL certificate expiry date for one
-or more hostnames and warns you before they expire. Zero dependencies. Just the
-Python 3 standard library.
-
-Useful for homelab operators, busy admins, and anyone who has ever woken up to a
-website that suddenly shows a scary red warning page.
+Checks TLS certificate expiration dates for one or more hostnames and returns warning exit codes.
 
 ## Features
-
 - Checks one or many hostnames in a single command
 - Configurable warning window (default: 30 days)
 - Reads hostnames from arguments or from stdin
@@ -17,27 +11,25 @@ website that suddenly shows a scary red warning page.
 - No third party packages, no virtualenv required
 
 ## Installation
-
 No build step. You only need Python 3.7 or newer.
 
 Option 1: download the single file directly.
 
 ```sh
-curl -O https://raw.githubusercontent.com/cappy-dev/ssl-cert-checker/main/ssl_cert_checker.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/ssl-cert-checker/ssl_cert_checker.py
 chmod +x ssl_cert_checker.py
 ```
 
 Option 2: clone the repo.
 
 ```sh
-git clone https://github.com/cappy-dev/ssl-cert-checker.git
-cd ssl-cert-checker
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/ssl-cert-checker
 ```
 
 That is it. No pip install, no requirements.txt.
 
 ## Usage
-
 Check a single host.
 
 ```sh
@@ -154,4 +146,4 @@ validation use a dedicated scanner like `testssl.sh` or `sslyze`.
 
 ## License
 
-MIT. See the LICENSE file for details.
+AGPL-3.0. See the [root license](../../LICENSE).

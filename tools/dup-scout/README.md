@@ -1,27 +1,8 @@
 # dup-scout
 
-Find duplicate files by content hash. Zero dependencies, pure Python 3.8+.
-
-`dup_scout.py` scans one or more directories and reports files that have
-identical contents, verified with SHA-256. It uses a three-phase pipeline
-so it can run fast even on huge trees:
-
-1. Index every regular file by size. Files with a unique size are unique
-   by content too, so they can be skipped immediately.
-2. Hash only the first 64 KiB of each size-matched file. Most size
-   collisions turn out to have different headers, so this cheap pass
-   eliminates the bulk of candidates without reading whole files.
-3. Run a full SHA-256 only on the small set of files that survived
-   phase 2.
-
-It also skips hardlinks (same inode) so you do not get false positives
-from filesystems that already share storage.
-
-Designed for homelab media libraries, backup trees, downloads folders,
-and any place you want to recover wasted space.
+Finds duplicate files by comparing their sizes and SHA-256 hashes.
 
 ## Features
-
 - Zero dependencies. Runs on any system with Python 3.8 or newer.
 - Three-phase pipeline (size, partial hash, full hash) for speed.
 - Output as plain text, JSON, or CSV.
@@ -38,20 +19,19 @@ and any place you want to recover wasted space.
 No build step. Just grab the script and run it:
 
 ```
-curl -O https://raw.githubusercontent.com/cappy-dev/dup-scout/main/dup_scout.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/dup-scout/dup_scout.py
 chmod +x dup_scout.py
 ```
 
 Or clone the repo:
 
 ```
-git clone https://github.com/cappy-dev/dup-scout.git
-cd dup-scout
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/dup-scout
 python3 dup_scout.py --help
 ```
 
 ## Usage
-
 ```
 python3 dup_scout.py PATH [PATH...] [options]
 ```
@@ -180,7 +160,6 @@ The script never follows symlinks unless you pass `--follow-links`, and
 it never deletes files it has not hashed with the full SHA-256.
 
 ## Limitations
-
 - Only filesystems that expose stable device and inode numbers get the
   hardlink dedup optimization. On filesystems that lack it (some network
   mounts), the inode check is skipped automatically.
@@ -190,4 +169,4 @@ it never deletes files it has not hashed with the full SHA-256.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

@@ -1,6 +1,6 @@
 # tailscale-quick-setup
 
-A single shell script to install and configure Tailscale on common Linux distros. Zero dependencies beyond curl and sudo.
+Installs and configures Tailscale using the official package repositories. Requires curl and sudo.
 
 ## What it does
 
@@ -26,19 +26,18 @@ A single shell script to install and configure Tailscale on common Linux distros
 One-liner to install and log in interactively:
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/cappy-dev/tailscale-quick-setup/main/tailscale-quick-setup.sh | bash
+curl -sSL https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/tailscale-quick-setup/tailscale-quick-setup.sh | bash
 ```
 
 Or clone and run:
 
 ```bash
-git clone https://github.com/cappy-dev/tailscale-quick-setup.git
-cd tailscale-quick-setup
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/tailscale-quick-setup
 bash tailscale-quick-setup.sh
 ```
 
 ## Usage
-
 ```bash
 bash tailscale-quick-setup.sh [OPTIONS]
 ```
@@ -51,7 +50,6 @@ Options:
 - `--help, -h` Show help text
 
 ## Examples
-
 Install and log in via browser:
 
 ```bash
@@ -96,11 +94,10 @@ tailscale down         # disconnect without uninstalling
 5. Calls `tailscale up` with your auth key or opens a browser login
 
 ## Requirements
-
 - A supported Linux distribution
 - `sudo` privileges
 - `curl` (installed automatically on Debian/Ubuntu if missing)
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

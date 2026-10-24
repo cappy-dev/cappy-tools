@@ -1,18 +1,10 @@
 # tailscale-acl-audit
 
-A zero dependency Python linter that checks your Tailscale tailnet ACL file
-(huJSON) for common configuration mistakes and security gotchas. It never
-makes any network calls and never sends your policy anywhere.
-
-`tailscale_acl_audit.py` reads a tailnet policy file, strips comments and
-trailing commas, parses the result, then runs a small set of audit rules and
-prints a human readable report. You can also get JSON output for piping into
-another tool, and you can ask it to exit nonzero when there is a hard fail so
-it slots straight into CI.
+Checks Tailscale ACL files for common policy mistakes without sending the policy over the network.
 
 ## Why use it
 
-Tailnet ACL files are powerful but easy to get subtly wrong. A copied and
+Tailnet ACL files are flexible but easy to get subtly wrong. A copied and
 pasted rule can accidentally create a duplicate. A wildcard `dst` can let
 the wrong host in. A `reject` rule placed after an `accept` rule is silently
 shadowed and never fires. This tool catches those issues before you push the
@@ -23,18 +15,16 @@ party packages, no networking, and no side effects beyond reading the file
 you pass in.
 
 ## Requirements
-
 - Python 3.8 or newer
 - No pip install required. The standard library is enough.
 
 ## Installation
-
 Copy the script somewhere on your PATH, or just run it from the repo.
 
 ```bash
 # Option A: clone and run in place
-git clone https://github.com/cappy-dev/tailscale-acl-audit.git
-cd tailscale-acl-audit
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/tailscale-acl-audit
 python3 tailscale_acl_audit.py path/to/your.acl.hujson
 
 # Option B: drop the single file into your dotfiles
@@ -44,7 +34,6 @@ tailscale_acl_audit path/to/your.acl.hujson
 ```
 
 ## Usage
-
 ```text
 usage: tailscale_acl_audit [-h] [-q] [--exit-code] [--json] [-V] aclfile
 
@@ -60,7 +49,6 @@ optional arguments:
 ```
 
 ## Examples
-
 Audit a policy file and print a human readable report:
 
 ```bash
@@ -137,4 +125,4 @@ bringing down the whole audit.
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

@@ -1,11 +1,8 @@
 # jmail-python
 
-A simple, easy-to-use Python library for accessing the [Jmail Data API](https://jmail.world/docs/), the public data API for the Jeffrey Epstein email archive.
-
-No API keys. No rate limits. No authentication. Just data.
+A Python client for the public Jmail Data API. See the API documentation for current access requirements and limits.
 
 ## Installation
-
 ```bash
 pip install jmail-python
 ```
@@ -16,8 +13,7 @@ Or with [uv](https://docs.astral.sh/uv/):
 uv pip install jmail-python
 ```
 
-## Quick Start
-
+## Quick start
 ```python
 from jmail import JmailClient
 
@@ -150,4 +146,4 @@ All data is public domain (US government records), served as static Parquet file
 
 ## License
 
-AGPL-3.0. See [LICENSE](LICENSE) for details.
+AGPL-3.0. See the [root license](../../LICENSE).

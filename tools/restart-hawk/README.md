@@ -1,17 +1,8 @@
 # restart-hawk
 
-A tiny, zero-dependency tool that watches long-running processes and tells you when they unexpectedly restart or silently disappear.
-
-Restart Hawk is built for cron. You point it at a list of process names (or a config file), and on every run it records the current PID of each process. If the PID changes, it announces a restart. If the process is gone, it announces a disappearance. Exit codes are machine-friendly so you can wire it into monitoring or shell scripts.
-
-Pure Python 3.8+ standard library. No pip. No venv. No virtualenv. No Docker. Just one file.
-
-## Why
-
-Long-running services usually start back up on their own after a crash. From the outside, everything looks fine, but the process restarted in the middle of the night and you never knew. Restart Hawk closes that gap. Run it from cron every few minutes and you get a permanent, logged record of every restart and silent exit.
+Tracks process IDs across runs and reports processes that restarted or disappeared.
 
 ## Features
-
 - Watches any process by its short command name (what you see in `/proc/<pid>/comm`).
 - Detects PID changes (restarts) and missing processes (silent exits).
 - Logs every restart and disappearance to a timestamped events log.
@@ -22,11 +13,10 @@ Long-running services usually start back up on their own after a crash. From the
 - Zero dependencies. Runs anywhere Python 3.8 or newer is installed.
 
 ## Installation
-
 Copy the script onto your machine and make it executable.
 
 ```bash
-curl -fsSL -o restart_hawk.py https://raw.githubusercontent.com/cappy-dev/restart-hawk/main/restart_hawk.py
+curl -fsSL -o restart_hawk.py https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/restart-hawk/restart_hawk.py
 chmod +x restart_hawk.py
 ./restart_hawk.py --version
 ```
@@ -34,15 +24,14 @@ chmod +x restart_hawk.py
 Or clone it:
 
 ```bash
-git clone https://github.com/cappy-dev/restart-hawk.git
-cd restart-hawk
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/restart-hawk
 ./restart_hawk.py --version
 ```
 
 No install step. No package manager. The entire tool is one Python file.
 
 ## Usage
-
 All commands support `--state-dir` to override where state is stored (the default is `~/.restart-hawk`).
 
 ### Watch processes from the command line
@@ -122,7 +111,6 @@ A cron entry could look like this:
 ```
 
 ## Examples
-
 First run records the current PID:
 
 ```text
@@ -193,10 +181,9 @@ Restart Hawk reads `/proc/<pid>/comm`, which the Linux kernel truncates to 15 ch
 If `/proc` is not readable, Restart Hawk falls back to calling `pgrep -x`. A pattern that does not match a real process name will simply report CRITICAL, which lets you catch configuration typos and silently killed services.
 
 ## Requirements
-
 - Python 3.8 or newer
 - A Linux system with a readable `/proc` filesystem, or `pgrep` available as a fallback
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

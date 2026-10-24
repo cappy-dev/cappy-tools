@@ -1,11 +1,6 @@
 # dns-torch
 
-Light up DNS problems with a single command.
-
-A zero-dependency Python CLI that runs DNS, SSL, email, blacklist, and HTTP
-security header checks on any domain and prints a color-coded report to your
-terminal. Uses only the Python standard library plus `dig` (bundled with most
-Linux and macOS systems).
+Checks DNS records, TLS certificates, email configuration, blocklists, and HTTP headers. Requires Python and dig.
 
 ## What it checks
 
@@ -20,31 +15,28 @@ Linux and macOS systems).
 - **DNSBL blacklist** - checks domain IPs against Spamhaus, Spamcop, SORBS
 
 ## Requirements
-
 - Python 3.9 or newer
 - `dig` (from the `dnsutils` or `bind9-utils` package on most distros)
 - Works on Linux and macOS
 
 ## Installation
-
 Clone the repo and make the script executable:
 
 ```bash
-git clone https://github.com/cappy-dev/dns-torch.git
-cd dns-torch
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/dns-torch
 chmod +x dns_torch.py
 ```
 
 Or run it directly without cloning:
 
 ```bash
-python3 <(curl -sL https://raw.githubusercontent.com/cappy-dev/dns-torch/main/dns_torch.py) example.com
+python3 <(curl -sL https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/dns-torch/dns_torch.py) example.com
 ```
 
 No pip packages needed. Zero dependencies beyond the standard library and dig.
 
 ## Usage
-
 Basic scan of a domain:
 
 ```bash
@@ -144,4 +136,4 @@ standard library, so there is nothing to install and nothing to break.
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

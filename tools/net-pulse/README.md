@@ -1,15 +1,8 @@
 # net-pulse
 
-Zero-dependency internet connectivity monitor for homelabs and self-hosters.
-
-net-pulse probes latency, DNS resolution, HTTP reachability, and download
-throughput against configurable targets, then exits with a clean status code
-so cron and monitoring stacks can pick it up. It writes an attractive HTML
-status page on demand and works in minimal containers without iputils-ping
-installed (it falls back to a TCP handshake latency probe automatically).
+Checks connection latency, DNS resolution, HTTP reachability, and download throughput, with an optional HTML report.
 
 ## Features
-
 - Pure Python standard library, no pip installs required
 - Four probe types: `ping`, `dns`, `http`, `speed`
 - ICMP ping with automatic TCP fallback when `ping` is missing
@@ -20,11 +13,10 @@ installed (it falls back to a TCP handshake latency probe automatically).
 - Optional TOML config file for custom target lists
 
 ## Installation
-
 net-pulse is a single file. Drop it somewhere on your PATH or run it in place.
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/net-pulse/main/net_pulse.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/net-pulse/net_pulse.py
 chmod +x net_pulse.py
 ```
 
@@ -32,7 +24,6 @@ Requires Python 3.8 or newer and the OS ping command for ICMP probes (optional;
 the tool falls back to TCP when ping is unavailable).
 
 ## Usage
-
 Run the default probes against Cloudflare, Google, and GitHub:
 
 ```bash
@@ -173,4 +164,4 @@ Overall: HEALTHY
 
 ## License
 
-MIT. See LICENSE.
+AGPL-3.0. See the [root license](../../LICENSE).

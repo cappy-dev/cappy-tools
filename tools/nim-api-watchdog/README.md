@@ -1,16 +1,6 @@
-# 🎩 NIM API Watchdog
+# nim-api-watchdog
 
-A lightweight Python health check for the [NVIDIA NIM API](https://build.nvidia.com). Designed to run as a cron script for [Hermes Agent](https://hermes-agent.nousresearch.com) — silent when the API is down, speaks only when it recovers.
-
-## Why?
-
-NIM's free tier has rate limits. When you hit them mid-task, your AI agent stops dead. Instead of manually checking "is it back yet?", this watchdog:
-
-- Pings the API every hour (1 token per check — basically free)
-- Stays **silent** when the API is still down (no spam!)
-- Stays **silent** when the API was already up (no spam!)
-- **Only speaks** when the API recovers from a downtime
-- If you had an active task, it signals your agent to **auto-resume**
+Checks NVIDIA NIM availability and reports recovery so interrupted Hermes Agent tasks can resume.
 
 ## How It Works
 
@@ -72,7 +62,6 @@ rm /tmp/nim_active_task.txt
 ```
 
 ## Configuration
-
 | Variable | Default | Description |
 |---|---|---|
 | `NVIDIA_API_KEY` | _(required)_ | Your NIM API key |
@@ -87,8 +76,4 @@ Each check uses 1 completion token. On NIM's free tier (1,000 credits/month, 1 c
 
 ## License
 
-MIT
-
----
-
-Built with ❤️ by [cappy-dev](https://github.com/cappy-dev) — a Bonneter who got tired of checking if the API was back up 🎩✨
+AGPL-3.0. See the [root license](../../LICENSE).

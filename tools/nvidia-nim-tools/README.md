@@ -1,29 +1,27 @@
 # nvidia-nim-tools
 
-CLI toolkit for the NVIDIA NIM free tier. Query models, run chat completions, generate embeddings, and manage your API key from the terminal. Zero dependencies beyond Python 3.7+.
+Lists NVIDIA NIM models, sends completion requests, and generates embeddings from the command line. Access depends on your API key and provider limits.
 
 ## What it does
 
-- **List models**: See which NIM models are available to your API key
-- **Chat completions**: Send messages and get responses from LLMs
-- **Text completions**: Use the legacy completions endpoint
-- **Embeddings**: Generate vector embeddings for text
-- **Health check**: Verify your API key and connectivity
-- **Config management**: Store, show, and remove your API key locally
-- **Model aliases**: 10 built-in shortcuts for popular free-tier models
+- List models. See which NIM models are available to your API key
+- Chat completions. Send messages and get responses from LLMs
+- Text completions. Use the legacy completions endpoint
+- Embeddings. Generate vector embeddings for text
+- Health check. Verify your API key and connectivity
+- Config management. Store, show, and remove your API key locally
+- Model aliases. 10 built-in shortcuts for popular free-tier models
 
 ## Requirements
-
 - Python 3.7 or newer
 - An NVIDIA NIM API key (free at https://build.nvidia.com/)
 
 No pip packages needed. The tool uses only the Python standard library.
 
 ## Installation
-
 ```bash
-git clone https://github.com/cappy-dev/nvidia-nim-tools.git
-cd nvidia-nim-tools
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/nvidia-nim-tools
 chmod +x nvt.py
 ```
 
@@ -54,7 +52,6 @@ python3 nvt.py --api-key nvapi-xxxxx models
 ```
 
 ## Usage
-
 ### List available models
 
 ```bash
@@ -156,4 +153,4 @@ Your API key is stored locally at `~/.config/nvidia-nim-tools/config.json`. The 
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

@@ -1,15 +1,8 @@
 # eden-launcher
 
-A small bash script that downloads and launches the latest [Eden](https://git.eden-emu.dev/eden-emu/eden) nightly Linux amd64 PGO AppImage from the official nightly release feed.
-
-Auto-updates by querying `https://nightly.eden-emu.dev/latest/release.json` (the same API Eden itself uses for in-app updates, wired up in `CMakeModules/GenerateSCMRev.cmake`), caches the downloaded AppImage, and only re-downloads when a new nightly tag appears.
-
-## Why
-
-Eden publishes many AppImage variants per nightly (amd64/aarch64/legacy/steamdeck/rog-ally, standard/PGO, plus `.zsync` files). This launcher picks the recommended Linux amd64 PGO build (`Eden-Linux-<commit>-amd64-clang-pgo.AppImage`) and skips the `.zsync` update deltas. It caches under `~/.cache/eden-launcher/` so subsequent launches are instant unless a new release is out.
+Downloads, caches, and launches the latest Eden nightly Linux amd64 PGO AppImage from its official release feed.
 
 ## Requirements
-
 - `curl`
 - `jq`
 - A Linux desktop that can run AppImages (FUSE + a display)
@@ -22,7 +15,6 @@ sudo dnf install jq     # Fedora
 ```
 
 ## Usage
-
 ```bash
 ./eden-launcher.sh             # download (if needed) and launch
 ./eden-launcher.sh --check     # only check for / print the latest version
@@ -47,4 +39,4 @@ Eden is a community emulator project. This launcher is an independent convenienc
 
 ## License
 
-AGPL-3.0. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

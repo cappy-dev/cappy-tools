@@ -2,7 +2,7 @@
 #
 # tailscale-quick-setup - Install and configure Tailscale on common Linux distros
 #
-# Usage: curl -sSL https://raw.githubusercontent.com/cappy-dev/tailscale-quick-setup/main/tailscale-quick-setup.sh | bash
+# Usage: curl -sSL https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/tailscale-quick-setup/tailscale-quick-setup.sh | bash
 #   Or:  bash tailscale-quick-setup.sh [--auth-key=tskey-xxx] [--yes] [--uninstall]
 #
 set -euo pipefail

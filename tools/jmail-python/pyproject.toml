@@ -40,10 +40,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/cappy-dev/jmail-python"
-Repository = "https://github.com/cappy-dev/jmail-python"
+Homepage = "https://github.com/cappy-dev/cappy-tools/tree/main/tools/jmail-python"
+Repository = "https://github.com/cappy-dev/cappy-tools/tree/main/tools/jmail-python"
 Documentation = "https://jmail.world/docs/"
-"Bug Tracker" = "https://github.com/cappy-dev/jmail-python/issues"
+"Bug Tracker" = "https://github.com/cappy-dev/cappy-tools/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]

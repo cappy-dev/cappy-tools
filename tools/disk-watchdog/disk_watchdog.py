@@ -9,7 +9,7 @@ via sendmail, or a command). Designed to run from cron or systemd timers.
 
 Zero external dependencies. Just the Python standard library.
 
-License: MIT
+License: AGPL-3.0
 """
 
 import argparse
