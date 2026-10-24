@@ -1,8 +1,6 @@
 # disk-sentinel
 
-A tiny zero-dependency Python script that monitors disk health on Linux. It checks disk space usage, S.M.A.R.T. self-assessment results, disk temperature, and known-bad S.M.A.R.T. attributes, then prints a clean report and exits with a machine-friendly status code.
-
-Perfect for cron, monitoring hooks, or a quick sanity check from the terminal.
+Checks disk space, SMART health, drive temperatures, and selected SMART attributes on Linux.
 
 ## What it does
 
@@ -17,7 +15,6 @@ Perfect for cron, monitoring hooks, or a quick sanity check from the terminal.
 No pip packages required. Uses only the Python standard library.
 
 ## Requirements
-
 - Python 3.7 or newer
 - `smartmontools` (provides `smartctl`) for S.M.A.R.T. data. The script still runs without it, but skips S.M.A.R.T. checks and warns you.
 - Reading S.M.A.R.T. data usually needs root, or membership in the `disk` group. Disk usage and `/sys` info work as a normal user.
@@ -47,17 +44,15 @@ sudo apk add smartmontools
 ```
 
 ## Installation
-
 ```bash
-git clone https://github.com/cappy-dev/disk-sentinel.git
-cd disk-sentinel
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/disk-sentinel
 chmod +x disk_sentinel.py
 ```
 
 No build step. No Python virtual environment needed. The script is a single file.
 
 ## Usage
-
 Check every disk on the system, with text output and colors:
 
 ```bash
@@ -154,4 +149,4 @@ Reallocated sectors (ID 5) are counted as critical when non-zero. Pending sector
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

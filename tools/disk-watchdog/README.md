@@ -1,6 +1,6 @@
 # disk-watchdog
 
-A tiny Python watchdog that monitors disk usage and SMART health on a Linux box. When a filesystem gets too full or a drive reports failing SMART attributes, it fires alerts through log files, webhooks, email, or a custom command. Designed to run from cron or systemd timers with zero external dependencies.
+Monitors filesystem usage and SMART health, with configurable log, webhook, email, and command alerts.
 
 ## What it does
 
@@ -12,7 +12,6 @@ A tiny Python watchdog that monitors disk usage and SMART health on a Linux box.
 - One script, no pip installs, just the Python standard library
 
 ## Requirements
-
 - Python 3.7 or newer
 - `smartctl` from the `smartmontools` package is optional but recommended for SMART checks. On Debian/Ubuntu: `apt install smartmontools`. On Fedora: `dnf install smartmontools`.
 - Root or sudo is helpful for reading SMART data and writing to `/var/log/`
@@ -20,10 +19,9 @@ A tiny Python watchdog that monitors disk usage and SMART health on a Linux box.
 No pip packages needed. The script uses only standard library modules.
 
 ## Installation
-
 ```bash
-git clone https://github.com/cappy-dev/disk-watchdog.git
-cd disk-watchdog
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/disk-watchdog
 chmod +x disk_watchdog.py
 ```
 
@@ -71,7 +69,6 @@ sudo nano /etc/disk-watchdog.json
 ```
 
 ## Usage
-
 ```bash
 python3 disk_watchdog.py [OPTIONS]
 ```
@@ -88,7 +85,6 @@ Options:
 - `--version`           Show version and exit
 
 ### Examples
-
 Run everything with defaults:
 
 ```bash
@@ -120,7 +116,6 @@ python3 disk_watchdog.py --print-default-config > /etc/disk-watchdog.json
 ```
 
 ## Configuration
-
 The config is a single JSON file. Every field has a default, so you only need to set the values you want to change.
 
 The bundled `--print-default-config` dumps the full schema. Key fields:
@@ -257,4 +252,4 @@ Most disk monitoring tools are either heavyweight web dashboards (Uptime Kuma, N
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

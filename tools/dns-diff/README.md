@@ -1,11 +1,6 @@
 # dns-diff
 
-Compare DNS records between two nameservers. Spot what changed when you migrate
-DNS providers, test new records before cutting over, or audit your nameservers
-for drift.
-
-Zero dependencies. Pure Python 3.8+. Optionally uses `dig` if installed, and
-falls back to a built-in DNS-over-UDP client otherwise.
+Compares DNS records between two nameservers for provider migrations and configuration checks.
 
 ## What it does
 
@@ -18,7 +13,7 @@ or unchanged when comparing left versus right.
 No install needed. Download the script and run it with Python 3.8+.
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/dns-diff/main/dnsdiff.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/dns-diff/dnsdiff.py
 chmod +x dnsdiff.py
 ./dnsdiff.py --help
 ```
@@ -26,13 +21,12 @@ chmod +x dnsdiff.py
 Or clone the repo:
 
 ```bash
-git clone https://github.com/cappy-dev/dns-diff.git
-cd dns-diff
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/dns-diff
 python3 dnsdiff.py --help
 ```
 
 ## Usage
-
 ```
 python3 dnsdiff.py SERVER_A SERVER_B [options]
 ```
@@ -59,7 +53,6 @@ python3 dnsdiff.py SERVER_A SERVER_B [options]
 `A`, `AAAA`, `CNAME`, `MX`, `NS`, `SOA`, `TXT`, `PTR`
 
 ## Examples
-
 Compare a single domain between two nameservers:
 
 ```bash
@@ -131,14 +124,14 @@ and EDNS is intentionally left out to keep the script small.
 
 ## Output format notes
 
-- **text**: colored terminal output (colors auto-disable when piped). Shows
+- text. colored terminal output (colors auto-disable when piped). Shows
   `-` for removed, `+` for added, `=` for matching records.
-- **json**: a JSON array with one object per domain, including `left`,
+- json. a JSON array with one object per domain, including `left`,
   `right`, `added`, `removed`, `common`, and `record_types` keys.
-- **markdown**: a compact list summary suitable for wiki pages or READMEs.
+- markdown. a compact list summary suitable for wiki pages or READMEs.
 - When `--exit-code` is set, the script returns exit code `1` if any domain
   had differences. This is useful for CI pipelines and monitoring checks.
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

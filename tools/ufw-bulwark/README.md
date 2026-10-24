@@ -1,26 +1,8 @@
 # ufw-bulwark
 
-Zero-dependency auditor for UFW (Uncomplicated Firewall) rules on Linux. One
-Python script, standard library only, no installs required.
-
-`ufw-bulwark` reads your current `ufw status verbose`, inspects every rule and
-the global defaults, and flags risky configuration such as:
-
-- SSH (port 22) open to the world without rate limiting
-- Telnet, MySQL, Redis, MongoDB, Elasticsearch, and other sensitive services
-  exposed to `Anywhere`
-- A "default allow incoming" policy that leaves the box wide open
-- IPv6 disabled while the host still has IPv6 connectivity
-- Very broad source CIDRs (such as a `/8`) for sensitive ports
-- Rules that allow all traffic from an IP with no port restriction
-- Duplicate rules
-
-It prints a clean text report and optionally writes a self-contained HTML page
-for browsing. Exit codes make it friendly to run from cron: alert only on
-critical findings, or escalate on warnings too.
+Audits UFW rules and defaults for potentially unsafe exposure of network services.
 
 ## Requirements
-
 - Python 3.8 or newer
 - The `ufw` command on `PATH` (installed by default on Ubuntu and most Debian
   systems). Not needed when you pass `--input` to review a saved dump offline.
@@ -31,14 +13,14 @@ critical findings, or escalate on warnings too.
 No build step. Just grab the script and make it executable:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/ufw-bulwark/main/ufw_bulwark.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/ufw-bulwark/ufw_bulwark.py
 chmod +x ufw_bulwark.py
 ```
 
 Or clone the repo and link it onto your `PATH`:
 
 ```bash
-git clone https://github.com/cappy-dev/ufw-bulwark.git
+git clone https://github.com/cappy-dev/cappy-tools.git
 sudo ln -s "$PWD/ufw-bulwark/ufw_bulwark.py" /usr/local/bin/ufw-bulwark
 ```
 
@@ -46,7 +28,6 @@ You need permission to run `ufw status verbose`, which on most systems means
 running it with `sudo`.
 
 ## Usage
-
 Audit the live firewall:
 
 ```bash
@@ -161,4 +142,4 @@ exposure is almost always a mistake. Current set:
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

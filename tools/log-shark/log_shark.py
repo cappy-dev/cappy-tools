@@ -7,7 +7,7 @@ then surfaces useful summaries: top client IPs, HTTP status code breakdowns,
 error spikes, and the busiest endpoints. Designed for cron and quick SSH checks.
 
 Author: cappy-dev
-License: MIT
+License: AGPL-3.0
 """
 
 import argparse

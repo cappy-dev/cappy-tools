@@ -26,7 +26,7 @@ This tool uses only the Python 3.8+ standard library and the git CLI. No pip
 packages required.
 
 Author: cappy-dev
-License: MIT
+License: AGPL-3.0
 """
 
 from __future__ import annotations

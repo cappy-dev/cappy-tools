@@ -1,20 +1,8 @@
 # homelab-ports
 
-A tiny, dependency-free Python CLI that scans your local network for the ports
-most commonly used by self-hosted homelab services (Pi-hole, Grafana, Home
-Assistant, Portainer, SMB, Kubernetes, and friends). It reports which ports are
-open and labels them with the service that typically owns them, so you can spot
-a misconfigured or accidentally exposed service before it becomes a problem.
-
-Designed as the audit companion to a status dashboard: point it at your subnet,
-let it run, and see what is actually listening. Great for a quick pre-flight
-check before opening a firewall port or announcing a new container.
-
-> Only scan networks you own or have explicit permission to scan. This tool is
-> meant for homelab self-audits, not offensive scanning.
+Scans selected TCP ports and labels common self-hosted services. Scan only systems you own or have permission to test.
 
 ## Features
-
 - Zero third-party dependencies. Runs on any machine with Python 3.9+.
 - Sensible curated default port list for common self-hosted services.
 - Accepts a CIDR range, a single IP, or a hostname.
@@ -24,11 +12,10 @@ check before opening a firewall port or announcing a new container.
 - Clean ANSI colored output (and a `--no-color` fallback).
 
 ## Installation
-
 No install step is required. Just download the script and run it.
 
 ```sh
-curl -O https://raw.githubusercontent.com/cappy-dev/homelab-ports/main/homelab_ports.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/homelab-ports/homelab_ports.py
 chmod +x homelab_ports.py
 ```
 
@@ -40,12 +27,10 @@ homelab-ports --help
 ```
 
 ## Requirements
-
 - Python 3.9 or newer.
 - No pip packages needed. Uses only the standard library.
 
 ## Usage
-
 ```sh
 # Scan your whole home subnet (192.168.1.0/24) with the default port list.
 python3 homelab_ports.py 192.168.1.0/24
@@ -113,5 +98,4 @@ With `--no-color` the ANSI escapes are dropped, handy for piped logs.
 
 ## License
 
-MIT. See `LICENSE`.
-```
+AGPL-3.0. See the [root license](../../LICENSE).

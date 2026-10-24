@@ -1,9 +1,8 @@
 # cron-watchdog
 
-A zero-dependency Python tool to monitor whether scheduled cron jobs actually ran on time.
+Records successful cron runs and reports jobs that missed their expected window.
 
 ## Features
-
 - Zero dependencies - pure Python standard library
 - Tracks cron jobs by recording when they successfully run
 - Checks if jobs ran within their expected window
@@ -12,12 +11,11 @@ A zero-dependency Python tool to monitor whether scheduled cron jobs actually ra
 - Cron-friendly exit codes (0 for success, 1 for stale jobs)
 
 ## Installation
-
 ### From source (recommended for development)
 
 ```bash
-git clone https://github.com/cappy-dev/cron-watchdog.git
-cd cron-watchdog
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/cron-watchdog
 python3 -m pip install --user .
 ```
 
@@ -28,7 +26,6 @@ python3 -m pip install cron-watchdog
 ```
 
 ## Usage
-
 ### Record a job run
 
 Wrap your cron job with `cron_watchdog.py touch`:
@@ -67,7 +64,6 @@ Exit codes:
 Shows each job, its status (OK or STALE), age in seconds, and expected window.
 
 ## Configuration
-
 You can configure jobs in several ways:
 
 1. **Command-line flags** (per invocation)
@@ -119,4 +115,4 @@ python3 cron_watchdog.py check --state-dir "$CRON_WATCHDOG_DIR"
 
 ## License
 
-MIT License - see the [LICENSE](LICENSE) file.
+AGPL-3.0. See the [root license](../../LICENSE).

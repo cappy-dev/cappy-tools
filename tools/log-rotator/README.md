@@ -1,14 +1,8 @@
 # log-rotator
 
-Zero-dependency log rotation, compression, and pruning for self-hosted services.
-A single Python file with no external libraries. Designed to run from cron or a
-systemd timer so plain-text log files never grow without bound.
-
-Rotate by size, keep a fixed number of copies, delete old rotations by age, and
-optionally gzip the rotated files to save disk space.
+Rotates, compresses, and prunes local log files by size, count, and age.
 
 ## Features
-
 - Rotate when a log exceeds a size threshold (100k, 5M, 1G, ...)
 - Keep at most N rotated copies per log file
 - Delete rotated copies older than N days
@@ -32,11 +26,9 @@ log-rotator /var/log/nginx/access.log /var/log/nginx/error.log \
 ```
 
 ## Installation
-
 No build step. No pip install. Just two files in this repo:
 
 - `log_rotator.py` the entire tool
-- `LICENSE` the MIT license
 
 Copy `log_rotator.py` wherever you like. Make it executable:
 
@@ -60,7 +52,6 @@ log-rotator --version
 Requires Python 3.8 or newer. Nothing else.
 
 ## Usage
-
 ```
 usage: log_rotator [-h] [-s MAX_SIZE] [-n KEEP_COUNT] [-d KEEP_DAYS]
                    [-z] [--no-compress] [--always] [--prune-only] [-v]
@@ -90,7 +81,6 @@ options:
 Size values accept `k`, `m`, `g`, `t` suffixes (binary: 1k = 1024 bytes).
 
 ## Examples
-
 Rotate a single log over 10M (the default), keep 5 copies:
 
 ```bash
@@ -214,7 +204,6 @@ chown myapp:myapp /var/log/myapp.log
 ```
 
 ## Limitations
-
 - Only plain-text files on a local filesystem. No rotation for stdout or pipes.
 - Compressed files are not re-compressed if they already end in `.gz`.
 - No built-in signal handling for log daemons. Reload your service yourself.
@@ -222,4 +211,4 @@ chown myapp:myapp /var/log/myapp.log
 
 ## License
 
-MIT. See `LICENSE` for the full text.
+AGPL-3.0. See the [root license](../../LICENSE).

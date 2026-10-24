@@ -1,24 +1,8 @@
 # backup-verify
 
-Zero-dependency Python tool that verifies the integrity of backup archives.
-
-Knows about tar, tar.gz, tar.bz2, tar.xz, and zip. Checks readability,
-validates archive structure, optionally compares against SHA256 checksums,
-and can extract into a temp directory to confirm a backup is restorable.
-
-Perfect for cron jobs that run after your backup script so you get a heads up
-before you actually need to restore from something that is broken.
-
-## Why
-
-You rotate backups. You copy them to offsite storage. You feel safe.
-
-But have you ever tried to **restore** one of those archives three months later
-only to find it was truncated or corrupt the whole time? It happens more than
-anyone wants to admit. This tool catches that problem early.
+Checks backup archives for unreadable data, invalid structure, and checksum mismatches. Supports tar and zip archives, with an optional extraction check.
 
 ## Features
-
 - Validates gzip CRC, zip CRC32, tar structure, bzip2 stream, and xz headers
 - Detects truncated and zero-byte files that other tools silently accept
 - Optional SHA256 comparison against a checksum file (shasum -c format or CSV)
@@ -30,28 +14,25 @@ anyone wants to admit. This tool catches that problem early.
 - Pure Python 3.8+ standard library. No pip. No venv. No dependencies.
 
 ## Requirements
-
 - Python 3.8 or newer
 - Nothing else. Uses only the standard library.
 
 ## Installation
-
 Copy the single script wherever you like and make it executable:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/backup-verify/main/backup_verify.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/backup-verify/backup_verify.py
 chmod +x backup_verify.py
 ```
 
 Or just clone the repo:
 
 ```bash
-git clone https://github.com/cappy-dev/backup-verify.git
-cd backup-verify
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/backup-verify
 ```
 
 ## Usage
-
 ### Verify every archive in a directory
 
 ```bash
@@ -176,4 +157,4 @@ When pointed at a single file path, the file is checked regardless of extension.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

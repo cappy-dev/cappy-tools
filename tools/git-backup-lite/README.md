@@ -1,18 +1,8 @@
 # git-backup-lite
 
-Zero-dependency local backup for git repositories. One Python script, no extra
-packages, just the standard library.
-
-Point it at a folder full of git repos and it bundles each one into a timestamped
-backup run. Non-bare repos are captured with `git bundle` (one file per repo that
-preserves every ref and object). Bare repos are copied directly. A JSON report is
-written beside the backups so you can see what happened in each run.
-
-Great for homelab cron jobs, offline snapshots, and anyone who wants a simple
-"copy my repos somewhere safe" script without wiring up a full backup suite.
+Backs up local Git repositories with git bundle and copies bare repositories into timestamped backup runs.
 
 ## Features
-
 - No third-party packages. Python 3.8 or newer plus the `git` binary.
 - Works on bare and non-bare repos.
 - `git bundle` output keeps the full history, branches, and tags.
@@ -23,25 +13,23 @@ Great for homelab cron jobs, offline snapshots, and anyone who wants a simple
 - Exclude subdirectories from the scan.
 
 ## Installation
-
 Drop the script anywhere and make it executable:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/git-backup-lite/main/git_backup.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/git-backup-lite/git_backup.py
 chmod +x git_backup.py
 ```
 
 Or clone the repo:
 
 ```bash
-git clone https://github.com/cappy-dev/git-backup-lite.git
-cd git-backup-lite
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/git-backup-lite
 ```
 
 That is it. No pip install, no virtualenv, no build step.
 
 ## Usage
-
 ```bash
 python3 git_backup.py <source-dir> <backup-dir> [options]
 ```
@@ -126,7 +114,6 @@ git --git-dir /srv/git/standalone.git fsck --full
 - `2` usage or setup error (bad paths, missing destination).
 
 ## Requirements
-
 - Python 3.8 or newer.
 - The `git` command available on your `PATH`.
 
@@ -135,4 +122,4 @@ standard library plus the git CLI.
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

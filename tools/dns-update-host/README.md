@@ -1,22 +1,8 @@
 # dns-update-host
 
-Keep a DNS `A` (and optionally `AAAA`) record synced to your current public IP address. Built for self-hosters and homelab operators whose ISP hands them a dynamic address that changes without warning.
-
-The script reads your current public IP, compares it to the last value it wrote to a small state file, and only calls the DNS provider API when the address actually changed. That keeps you well clear of API rate limits and makes it safe to run every few minutes from cron.
-
-Zero runtime dependencies beyond `/bin/sh`, `curl`, and standard POSIX utilities (`sed`, `grep`, `cut`). Tested with dash, bash, and busybox ash.
-
-## Why
-
-Most dynamic DNS clients either bundle a heavyweight runtime, hammer the provider API on every run regardless of whether anything changed, or only support one specific router. `dns-update-host` does one thing and does it from a single portable shell script you can actually read.
-
-Supported providers:
-
-- **Cloudflare** (out of the box). Set `CF_ZONE_ID`, `CF_API_TOKEN`, and `CF_RECORD_NAME` and you are done.
-- Pluggable provider design. See the `cloudflare_*` and `sync_record` functions near the bottom of the script if you want to add Porkbun, Route53, or anything else.
+Updates a DNS A or AAAA record when the host's public IP address changes.
 
 ## Installation
-
 ### Option 1: system install (recommended for a server)
 
 ```sh
@@ -57,7 +43,6 @@ CF_ZONE_ID=... CF_API_TOKEN=... CF_RECORD_NAME=home.example.com \
 ```
 
 ## Usage
-
 Run a one-off check that only prints your current public IP and never talks to the API:
 
 ```sh
@@ -130,4 +115,4 @@ The script calls exactly three provider functions: `cloudflare_get_record_id`, `
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

@@ -1,22 +1,8 @@
 # docker-health-watch
 
-A tiny standalone monitor for Docker container health. It polls the local
-Docker engine, watches every container that declares a HEALTHCHECK, and POSTs
-a JSON alert the moment any container flips to (or recovers from) unhealthy.
-
-No Docker SDK, no compose stack, no Prometheus. Just one Python script that
-uses the standard library and talks to `/var/run/docker.sock` directly.
-
-## Why
-
-Docker restarts containers when they exit, and `restart: always` keeps them
-alive, but a process can hang in place while its HEALTHCHECK fails. Most
-homelab setups would like to know immediately rather than discover it on
-Tuesday morning. This script gives you that single missing signal without
-standing up a full metrics pipeline.
+Monitors Docker container health through the local Docker socket and sends JSON alerts when health changes.
 
 ## Requirements
-
 - Python 3.8 or newer (only the standard library is used)
 - Read access to the Docker socket (`/var/run/docker.sock`)
 - Containers that define a HEALTHCHECK in their image or compose file
@@ -130,7 +116,6 @@ Once Docker itself reports the status, this script will react to it.
 - 2: at least one webhook delivery failed during a poll (the loop continues)
 
 ## Limitations
-
 - Watches only containers on the local Docker engine it can read via socket.
 - Health status comes from Docker's own HEALTHCHECK, so a container without
   one will never generate an alert here.
@@ -139,4 +124,4 @@ Once Docker itself reports the status, this script will react to it.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

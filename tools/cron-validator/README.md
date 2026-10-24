@@ -1,14 +1,8 @@
 # cron-validator
 
-A tiny, dependency-free Python tool to **validate, explain, and preview**
-cron expressions. A single file. No external packages. Just `python3`.
-
-Perfect for checking crontab edits before installing them, debugging a
-schedule that "never fires", or wiring into a CI pipeline that lints your
-`crontab` file.
+Validates five-field cron expressions, explains their fields, and previews upcoming run times.
 
 ## Features
-
 - Validates 5-field cron expressions
 - Supports all the usual syntaxes:
   - wildcards: `*`
@@ -24,12 +18,11 @@ schedule that "never fires", or wiring into a CI pipeline that lints your
 - Works with Python 3.8 or newer (tested on 3.11)
 
 ## Installation
-
 No install needed. Just clone and run:
 
 ```
-git clone https://github.com/cappy-dev/cron-validator.git
-cd cron-validator
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/cron-validator
 python3 cron_validator.py "*/5 * * * *"
 ```
 
@@ -41,7 +34,6 @@ sudo cp cron_validator.py /usr/local/bin/cron-validator
 ```
 
 ## Usage
-
 ### Basic validation
 
 ```
@@ -159,7 +151,6 @@ Standard 5-field format:
 | day-of-week   | 0-7   | SUN(0) through SAT(6); both 0 and 7 mean Sunday
 
 ## Examples
-
 Validate a quarterly job (first day of Jan/Apr/Jul/Oct at 2am):
 
 ```
@@ -174,4 +165,4 @@ python3 cron_validator.py "0 0 * * WED/2" --explain
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

@@ -1,15 +1,8 @@
 # simple-cert-check
 
-A tiny, dependency-free Python script that checks when your TLS/SSL
-certificates expire and warns you before they do. Perfect for homelab
-operators, self-hosters, and anyone who has watched a certificate
-quietly lapse and take a service offline.
-
-**Zero dependencies.** Runs on any system with Python 3.6 or newer and
-the standard library. No pip, no virtualenv, no Docker required.
+Checks TLS certificate expiration dates and reports certificates nearing expiry.
 
 ## Features
-
 - Checks one or more HTTPS endpoints in a single invocation
 - Reports days remaining until expiry, the not-after date, and the issuer
 - Color-coded output for OK / warning / expired / error
@@ -21,26 +14,24 @@ the standard library. No pip, no virtualenv, no Docker required.
   wrong with a broken cert)
 
 ## Installation
-
 No installation needed. Just grab the script and make it executable:
 
 ```sh
-curl -O https://raw.githubusercontent.com/cappy-dev/simple-cert-check/main/certcheck.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/simple-cert-check/certcheck.py
 chmod +x certcheck.py
 ```
 
 Or clone the repo:
 
 ```sh
-git clone https://github.com/cappy-dev/simple-cert-check.git
-cd simple-cert-check
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/simple-cert-check
 chmod +x certcheck.py
 ```
 
 That is it. There is no setup.py, no requirements.txt, nothing to build.
 
 ## Usage
-
 ```sh
 ./certcheck.py example.com
 ./certcheck.py example.com google.com github.com
@@ -133,4 +124,4 @@ a notifier.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

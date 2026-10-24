@@ -1,6 +1,6 @@
 # git-snapshot
 
-Timestamped archive snapshots of git repositories. One script, zero dependencies beyond git and tar.
+Creates timestamped tar archives of Git repositories, including the branch and commit in the filename.
 
 ## What it does
 
@@ -9,8 +9,8 @@ Creates `.tar.gz` archives of git repos with timestamps and branch/commit info b
 ## Quick start
 
 ```bash
-git clone https://github.com/cappy-dev/git-snapshot.git
-cd git-snapshot
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/git-snapshot
 chmod +x git-snapshot.sh
 
 # Snapshot the current repo
@@ -18,7 +18,6 @@ chmod +x git-snapshot.sh
 ```
 
 ## Usage
-
 ```bash
 ./git-snapshot.sh [OPTIONS] [REPO_PATH]
 ```
@@ -38,7 +37,6 @@ If REPO_PATH is omitted, the current directory is used.
 - `--version` - Show version number
 
 ### Examples
-
 Snapshot the current repo (archive goes to the parent directory):
 
 ```bash
@@ -146,7 +144,6 @@ git log   # shows full history
 ```
 
 ## Requirements
-
 - Bash 4.0+
 - Git
 - tar and gzip (standard on any Linux/macOS)
@@ -166,4 +163,4 @@ Use `git bundle` for creating portable repo clones. Use `git-snapshot` for point
 
 ## License
 
-MIT
+AGPL-3.0. See the [root license](../../LICENSE).

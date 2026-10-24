@@ -9,7 +9,7 @@ report. It never contacts any network endpoint and never sends your policy
 file anywhere.
 
 Author: cappy-dev
-License: MIT
+License: AGPL-3.0
 """
 
 from __future__ import annotations

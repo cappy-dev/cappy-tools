@@ -1,12 +1,6 @@
 # systemd-timer-monitor
 
-Audit systemd services and timers, report failures and mis-scheduled timers as a clean HTML status page. Zero dependencies, standard library only.
-
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Dependencies](https://img.shields.io/badge/dependencies-zero-success)
-
-`systemd_audit.py` inspects the local systemd journal and produces a single self-contained HTML file you can serve from any static web server or open in a browser. It also exports machine-readable JSON for monitoring pipelines and alerting.
+Audits systemd services and timers and writes an HTML report of failures and scheduling problems.
 
 ## What it checks
 
@@ -14,12 +8,7 @@ Audit systemd services and timers, report failures and mis-scheduled timers as a
 - **Stuck timers.** Lists all timer units, when each will next run, and when each last fired. Timers that are marked active but have never triggered get an `overdue` flag.
 - **Overall health.** A summary card at the top shows failed unit count, active timer count, and total timers, with a healthy/issues badge.
 
-## Why
-
-A surprising number of homelab outages come from a silently failed service or a timer that stopped firing weeks ago. This tool gives you a one-page glance at the health of your systemd-managed services so you spot problems before they cascade.
-
 ## Requirements
-
 - A Linux machine running systemd (Ubuntu, Debian, Fedora, Arch, and most modern distros ship it).
 - Python 3.8 or newer.
 - No third-party packages. Pure standard library.
@@ -27,12 +16,11 @@ A surprising number of homelab outages come from a silently failed service or a 
 You need permission to run `systemctl` (works as a regular user for most read operations; failed-unit counts are most reliable when run as root).
 
 ## Installation
-
 Clone the repository:
 
 ```bash
-git clone https://github.com/cappy-dev/systemd-timer-monitor.git
-cd systemd-timer-monitor
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/systemd-timer-monitor
 chmod +x systemd_audit.py
 ```
 
@@ -44,7 +32,6 @@ sudo chmod +x /usr/local/bin/systemd-audit
 ```
 
 ## Usage
-
 Run a one-off audit and write an HTML report:
 
 ```bash
@@ -184,4 +171,4 @@ Contributions are welcome. Please keep the script dependency-free and make sure 
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE).

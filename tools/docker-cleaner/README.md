@@ -1,39 +1,25 @@
 # docker-cleaner
 
-Reclaim disk space from unused Docker objects with a safe dry-run by default.
-
-`docker-cleaner.sh` prunes stopped containers, dangling images, orphaned networks, and (optionally) unused volumes and build cache. It shows you exactly what would be removed first, then only deletes when you explicitly say so.
-
-Zero dependencies beyond `bash`, `docker`, and standard coreutils. Works on Linux and macOS.
-
-## Why
-
-Docker accumulates stopped containers, dangling images, orphaned networks, and stale build cache over time. The built-in `docker system prune` is powerful but easy to run carelessly. This script:
-
-- Runs a **dry-run by default** so you preview every deletion first.
-- Prints a clear **disk usage summary** before and after.
-- Separates destructive options (volumes, all images) behind explicit flags.
-- Uses friendly, colorized output and prints the exact command for each step.
+Reports unused Docker objects and removes them only when explicitly requested. Dry-run is the default.
 
 ## Install
 
 Clone or copy the single script. No build step, no runtime dependencies.
 
 ```bash
-git clone https://github.com/cappy-dev/docker-cleaner.git
-cd docker-cleaner
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/docker-cleaner
 chmod +x docker-cleaner.sh
 ```
 
 Or download just the script:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/docker-cleaner/main/docker-cleaner.sh
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/docker-cleaner/docker-cleaner.sh
 chmod +x docker-cleaner.sh
 ```
 
 ## Usage
-
 ```bash
 ./docker-cleaner.sh                 # dry-run, preview what would be removed
 ./docker-cleaner.sh --apply          # delete unused containers, dangling images, networks
@@ -52,7 +38,6 @@ chmod +x docker-cleaner.sh
 - `--version`: Print version.
 
 ## Examples
-
 ### Preview only, nothing changes
 
 ```bash
@@ -132,4 +117,4 @@ The script needs access to the Docker daemon. If you can run `docker ps` you can
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

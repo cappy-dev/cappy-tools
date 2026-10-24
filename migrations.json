@@ -1,0 +1,103 @@
+[
+  {
+    "name": "csv-pretty",
+    "destination": "tools/csv-pretty",
+    "empty": true
+  },
+  {
+    "name": "dns-torch",
+    "destination": "tools/dns-torch",
+    "source_commit": "80fc6aba15257e5fd1b53d6dce8060a97d91cff5",
+    "source_branch": "main",
+    "source_tree": "ea0d564c0f5afa0bcb6574c80daf6746472553ce",
+    "empty": false
+  },
+  {
+    "name": "eden-launcher",
+    "destination": "tools/eden-launcher",
+    "source_commit": "309905f17ea2b16fabc1c3cfbb22857e38116fb9",
+    "source_branch": "main",
+    "source_tree": "d7b8a0835073bb69ef28708090d33fe458b5c47b",
+    "empty": false
+  },
+  {
+    "name": "jmail-client",
+    "destination": "tools/jmail-client",
+    "source_commit": "0dd66d92ba5c8b3b34b581b6f861c819d3cda4d9",
+    "source_branch": "main",
+    "source_tree": "285a108e3ea6bd780cf952efa2a1f384b66a5a16",
+    "empty": false
+  },
+  {
+    "name": "jmail-python",
+    "destination": "tools/jmail-python",
+    "source_commit": "aa67dfcb211e2e66333fbdd36ec30d92d0f84587",
+    "source_branch": "master",
+    "source_tree": "7c6eed27687b4d0fc97a45c45913507a7858b69d",
+    "empty": false
+  },
+  {
+    "name": "llama-cpp-benchmark",
+    "destination": "tools/llama-cpp-benchmark",
+    "source_commit": "371d9eaf6b5b8bb8b6feab54e66dd9123f6ec319",
+    "source_branch": "main",
+    "source_tree": "d254eff7e266735c3b13a8028d780f394e87fc6c",
+    "empty": false
+  },
+  {
+    "name": "llm-bench-lite",
+    "destination": "tools/llm-bench-lite",
+    "source_commit": "3daf8dba8e397de22d82f7be4b94564bfc68a363",
+    "source_branch": "main",
+    "source_tree": "d8cbe8da6a48eb9a3c34734301850389d6a5a61f",
+    "empty": false
+  },
+  {
+    "name": "markdown-to-static",
+    "destination": "tools/markdown-to-static",
+    "source_commit": "92b666a574c78f6f67e90f3d86c3031a9f858a61",
+    "source_branch": "main",
+    "source_tree": "f223f05ee7c352487542923ae1661cfed362c1e0",
+    "empty": false
+  },
+  {
+    "name": "nim-api-watchdog",
+    "destination": "tools/nim-api-watchdog",
+    "source_commit": "4a33a17028af6520d728fccd2cb7e1289c335ea9",
+    "source_branch": "master",
+    "source_tree": "89b833204e297c01a32f23b2bf03efca236cc4d5",
+    "empty": false
+  },
+  {
+    "name": "nvidia-nim-tools",
+    "destination": "tools/nvidia-nim-tools",
+    "source_commit": "9c8273fcbde29d373124396a15ddfc9986059835",
+    "source_branch": "main",
+    "source_tree": "58f252b1951777096353e6293c8f76b4ab3090bb",
+    "empty": false
+  },
+  {
+    "name": "ssh-key-audit",
+    "destination": "tools/ssh-key-audit",
+    "source_commit": "0b8b114e03e6dac61641fa0b0c06a36761f715bd",
+    "source_branch": "master",
+    "source_tree": "29c89867c75b63ea627ebfa332169c73c49e752f",
+    "empty": false
+  },
+  {
+    "name": "ssh-quick-setup",
+    "destination": "tools/ssh-quick-setup",
+    "source_commit": "e01a492c8274ae1c3fd05cf19fb9f388627192b4",
+    "source_branch": "master",
+    "source_tree": "faae3ec7026afe8c81791559230142ff5f4d802a",
+    "empty": false
+  },
+  {
+    "name": "ssl-cert-checker",
+    "destination": "tools/ssl-cert-checker",
+    "source_commit": "c9def66d44ad597fba78a5e0e12238b3e4450014",
+    "source_branch": "main",
+    "source_tree": "3ec05312e07a4ce185e5a65a1b066013364265e0",
+    "empty": false
+  }
+]

@@ -1,8 +1,6 @@
 # git-repo-sweeper
 
-Walk a directory tree, find every nested git repository, and tell you which ones need attention. Uncommitted changes, unpushed commits, branches that have fallen behind, and stale branches are all reported at a glance. Zero dependencies beyond Python 3.8 and the git CLI.
-
-Perfect for homelab users, developers with dozens of cloned repos, and anyone who keeps local mirrors of upstream projects. Run it from cron and let the exit code tell you whether anything drifted while you were away.
+Reports uncommitted changes, unpushed commits, and stale branches across local Git repositories.
 
 ## What it does
 
@@ -15,17 +13,15 @@ Perfect for homelab users, developers with dozens of cloned repos, and anyone wh
 - Returns cron friendly exit codes so a scheduler can decide when to page a human
 
 ## Requirements
-
 - Python 3.8 or newer
 - The `git` command line tool on your PATH
 
 No pip packages. Everything runs on the standard library.
 
 ## Installation
-
 ```bash
-git clone https://github.com/cappy-dev/git-repo-sweeper.git
-cd git-repo-sweeper
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/git-repo-sweeper
 chmod +x git_repo_sweeper.py
 ```
 
@@ -139,4 +135,4 @@ It never runs any commit, push, pull, checkout, or fetch. Sweeping is strictly r
 
 ## License
 
-MIT. See the [LICENSE](LICENSE) file for details.
+AGPL-3.0. See the [root license](../../LICENSE).

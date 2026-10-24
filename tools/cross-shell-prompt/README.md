@@ -1,11 +1,8 @@
 # cross-shell-prompt
 
-A clean, informative shell prompt for bash and zsh. Zero dependencies, just
-shell builtins. Drop it in and get a prompt that shows your last exit code,
-current git branch, and an abbreviated working directory.
+A Bash and Zsh prompt showing the previous exit status, current Git branch, and working directory.
 
 ## Features
-
 - Last command exit code indicator: green `o` on success, red `x` on failure
 - Current git branch, detected by reading `.git/HEAD` directly (no `git` fork)
 - Abbreviated working path: `~/projects/myapp` becomes `~/p/myapp`
@@ -23,7 +20,6 @@ The left prompt shows a normal successful command. The right shows what appears
 after a failing command (exit code 1 or higher).
 
 ## Installation
-
 Add one line to your shell config (`~/.bashrc` for bash, `~/.zshrc` for zsh):
 
 ```sh
@@ -35,7 +31,7 @@ Then start a new shell or run `source ~/.bashrc` (or `~/.zshrc`).
 ## Install via git clone
 
 ```sh
-git clone https://github.com/cappy-dev/cross-shell-prompt.git
+git clone https://github.com/cappy-dev/cappy-tools.git
 echo "source $(pwd)/cross-shell-prompt/prompt.sh" >> ~/.bashrc
 ```
 
@@ -50,7 +46,6 @@ For zsh, use `~/.zshrc` instead.
 Prints a sample prompt so you can see the format before installing.
 
 ## Configuration
-
 All settings are environment variables. Set them before sourcing the script.
 
 ### `CSP_SHOW_HOST`
@@ -134,8 +129,7 @@ Not compatible with fish, tcsh, or other shells. The script uses `PROMPT_COMMAND
 ## Files
 
 - `prompt.sh` - the full script. Source this file from your shell config.
-- `LICENSE` - MIT license.
 
 ## License
 
-MIT. See `LICENSE`.
+AGPL-3.0. See the [root license](../../LICENSE).

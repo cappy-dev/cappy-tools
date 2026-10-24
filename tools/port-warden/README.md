@@ -1,17 +1,8 @@
 # port-warden
 
-A zero-dependency Python tool that audits listening TCP and UDP ports on a
-Linux host. It maps every open port to the owning process and flags services
-that are risky to expose -- databases, Telnet, VNC, SNMP, Redis without auth,
-and the like -- so you can catch an accidental exposure before someone else
-does.
-
-Designed for cron. Exits non-zero when warnings are found, which makes it
-trivial to wire into a monitoring pipeline or a shell script that pages you
-at 3 AM.
+Audits listening TCP and UDP ports on Linux and flags services that may be unsafe to expose.
 
 ## Features
-
 - Scans both TCP and UDP listeners across IPv4 and IPv6
 - Maps each port to the owning process and PID
 - Flags a curated set of risky services (Telnet, plain FTP, exposed databases,
@@ -25,7 +16,6 @@ at 3 AM.
 - Runs entirely locally. No network calls ever leave the machine
 
 ## Requirements
-
 - Linux with `/proc` and `/sys` available
 - Python 3.7 or newer
 - `ss` from the `iproute2` package (recommended; falls back to `/proc/net`
@@ -33,12 +23,11 @@ at 3 AM.
 - `ip` from `iproute2` (only needed for the `--interface` filter)
 
 ## Installation
-
 No build step. Drop the script anywhere on your `PATH` and make it
 executable:
 
 ```bash
-curl -O https://raw.githubusercontent.com/cappy-dev/port-warden/main/port_warden.py
+curl -O https://raw.githubusercontent.com/cappy-dev/cappy-tools/main/tools/port-warden/port_warden.py
 chmod +x port_warden.py
 sudo mv port_warden.py /usr/local/bin/port-warden
 ```
@@ -46,13 +35,12 @@ sudo mv port_warden.py /usr/local/bin/port-warden
 That is the entire install. You also have the option to clone it:
 
 ```bash
-git clone https://github.com/cappy-dev/port-warden.git
-cd port-warden
+git clone https://github.com/cappy-dev/cappy-tools.git
+cd cappy-tools/tools/port-warden
 python3 port_warden.py
 ```
 
 ## Usage
-
 Run a basic scan:
 
 ```bash
@@ -146,4 +134,4 @@ file is needed; the rules are intentionally readable and small.
 
 ## License
 
-MIT License. See the `LICENSE` file for the full text.
+AGPL-3.0. See the [root license](../../LICENSE).
