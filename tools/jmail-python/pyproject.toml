@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jmail-python"
+version = "0.1.0"
+description = "Easy Python client for the Jmail Data API (Jeffrey Epstein email archive)"
+readme = "README.md"
+license = {text = "AGPL-3.0-or-later"}
+requires-python = ">=3.9"
+authors = [
+    {name = "cappy-dev"},
+]
+keywords = ["jmail", "epstein", "email archive", "data api", "parquet", "public records"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "pandas>=1.5",
+    "pyarrow>=10.0",
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/cappy-dev/jmail-python"
+Repository = "https://github.com/cappy-dev/jmail-python"
+Documentation = "https://jmail.world/docs/"
+"Bug Tracker" = "https://github.com/cappy-dev/jmail-python/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
