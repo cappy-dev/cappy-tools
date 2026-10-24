@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jmail-client"
+version = "1.0.0"
+description = "Easy Python client for the Jmail Data API (Jeffrey Epstein email archive)"
+readme = "README.md"
+license = {text = "AGPL-3.0-or-later"}
+requires-python = ">=3.9"
+authors = [
+    {name = "cappy-dev", email = "cappy-dev@users.noreply.github.com"}
+]
+keywords = ["jmail", "epstein", "email", "archive", "parquet", "data-api"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "pandas>=2.0",
+    "pyarrow>=14.0",
+    "requests>=2.28",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+]
+
+[project.scripts]
+jmail = "jmail.cli:main"
+
+[project.urls]
+"Homepage" = "https://github.com/cappy-dev/jmail-client"
+"Documentation" = "https://jmail.world/docs"
+"Source" = "https://github.com/cappy-dev/jmail-client"
+"API Docs" = "https://jmail.world/docs/python-client"
+
+[tool.setuptools]
+packages = ["jmail"]
+
