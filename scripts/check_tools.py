@@ -12,6 +12,13 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     errors = []
     tools = sorted(path for path in (ROOT / "tools").iterdir() if path.is_dir())
+    root_readme = (ROOT / "README.md").read_text()
+    listed_tools = set(re.findall(r"\]\(tools/([^/)]+)\)", root_readme))
+    tool_names = {tool.name for tool in tools}
+    for missing in sorted(tool_names - listed_tools):
+        errors.append(f"README.md: missing tools entry for {missing}")
+    for stale in sorted(listed_tools - tool_names):
+        errors.append(f"README.md: tools entry points to missing directory {stale}")
     licenses = [path for path in ROOT.rglob("LICENSE*") if ".git" not in path.parts]
     if licenses != [ROOT / "LICENSE"]:
         errors.append("Keep the license only at the repository root.")
