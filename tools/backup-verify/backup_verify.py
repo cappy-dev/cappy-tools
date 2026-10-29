@@ -84,7 +84,7 @@ def load_checksums(path):
 
     raw = p.read_text(errors="replace")
     # Try shasum format first
-    tried_csv = False
+    needs_csv = False
     for line in raw.splitlines():
         line = line.strip()
         if not line or line.startswith("#"):
@@ -95,9 +95,9 @@ def load_checksums(path):
             name = name.strip().lstrip("*")
             result[os.path.basename(name)] = digest.lower().strip()
             continue
-        tried_csv = True
+        needs_csv = True
 
-    if not result and not tried_csv:
+    if not result and needs_csv:
         # Fall back to CSV
         reader = csv.DictReader(io.StringIO(raw))
         for row in reader:
