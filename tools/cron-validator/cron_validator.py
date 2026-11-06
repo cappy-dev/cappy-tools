@@ -185,11 +185,11 @@ def parse_field(raw: str, spec: FieldSpec) -> set[int]:
                 )
 
         if lo > hi:
-            # Cron treats wrapped ranges (e.g. 22-2) as crossing the boundary.
-            hi, lo = lo, hi
-
-        for v in range(lo, hi + 1, step):
-            values.add(v)
+            # Wrapped ranges cross the field boundary, such as 22-2 for hours.
+            values.update(range(lo, upper + 1, step))
+            values.update(range(spec.min_value, hi + 1, step))
+        else:
+            values.update(range(lo, hi + 1, step))
 
     if spec is DOW_SPEC:
         # Map 7 -> 0 (Sunday)
