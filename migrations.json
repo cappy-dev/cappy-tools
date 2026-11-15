@@ -21,6 +21,17 @@
     "empty": false
   },
   {
+    "name": "github-profile-info",
+    "destination": "tools/github-profile-info",
+    "source_commit": "71e757c00652d8e9bf0f33cc87b2bb5bab9812d5",
+    "source_branch": "main",
+    "source_tree": "87b3b9a7b3fc2bbe955c5f9f569874c465e5c75d",
+    "empty": false,
+    "source_sha256": {
+      "github-profile-info": "03fa6be411af13fd5aca2fa64e8657ffbffbe35eff1542e523179783c2300c29"
+    }
+  },
+  {
     "name": "jmail-client",
     "destination": "tools/jmail-client",
     "source_commit": "0dd66d92ba5c8b3b34b581b6f861c819d3cda4d9",

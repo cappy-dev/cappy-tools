@@ -1,0 +1,312 @@
+#!/usr/bin/env python3
+"""
+github-profile-info - Generate a markdown info file for any GitHub profile.
+
+Usage:
+  github-profile-info <username> [--output path] [--repos] [--no-pinned]
+
+Options:
+  --output PATH    Output file path (default: ./<username>-profile-info.md)
+  --repos          Include detailed repo list (top 20 by stars)
+  --no-pinned      Skip fetching pinned repos (faster, no GitHub login needed)
+  --help           Show this help
+
+No authentication required. Uses the public GitHub REST API.
+Rate limit without auth: 60 requests/hour per IP.
+
+The tool fetches:
+  - User profile (name, bio, company, location, blog, twitter, followers, following, etc.)
+  - Public repo count, total stars, total forks
+  - Top languages across repos
+  - Top 20 repos by stars (optional with --repos)
+  - Pinned repos (scraped from public profile page, optional with --no-pinned to skip)
+
+Output: A clean markdown file ready for agents to read.
+"""
+
+import argparse
+import json
+import re
+import sys
+import urllib.request
+import urllib.error
+from collections import Counter
+from datetime import datetime
+
+
+def api_get(url):
+    """GET a GitHub API URL and return parsed JSON."""
+    req = urllib.request.Request(url, headers={
+        "Accept": "application/vnd.github.v3+json",
+        "User-Agent": "github-profile-info/1.0",
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            print(f"Error: User not found", file=sys.stderr)
+            sys.exit(1)
+        if e.code == 403:
+            print(f"Error: Rate limited by GitHub API. Try again later or use --no-pinned.", file=sys.stderr)
+            sys.exit(1)
+        print(f"Error: HTTP {e.code} from {url}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+def fetch_user(username):
+    """Fetch user profile from GitHub API."""
+    return api_get(f"https://api.github.com/users/{username}")
+
+
+def fetch_repos(username):
+    """Fetch all public repos for a user (paginated)."""
+    repos = []
+    page = 1
+    while True:
+        data = api_get(f"https://api.github.com/users/{username}/repos?per_page=100&page={page}&sort=pushed")
+        if not data:
+            break
+        repos.extend(data)
+        if len(data) < 100:
+            break
+        page += 1
+    return repos
+
+
+def fetch_pinned(username):
+    """Scrape pinned repos from the public profile page.
+    
+    GitHub's profile page includes pinned repos as links inside a
+    js-pinned-items-reorder-list container. We parse those out.
+    """
+    try:
+        req = urllib.request.Request(
+            f"https://github.com/{username}",
+            headers={"User-Agent": "github-profile-info/1.0"},
+        )
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+        
+        pinned = []
+        
+        # Method 1 (2026+): Find the pinned items reorder list container,
+        # then extract repo links (class="Link" inside that container).
+        # The container div has class "js-pinned-items-reorder-list"
+        list_match = re.search(
+            r'js-pinned-items-reorder-list(.*?)</div>\s*</div>\s*</div>',
+            html, re.DOTALL
+        )
+        if list_match:
+            block = list_match.group(1)
+            for repo_match in re.finditer(r'href="/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)"[^>]*class="Link', block):
+                pinned.append(repo_match.group(1))
+        
+        # Method 2 (fallback): Look for pinned items in the data-redirect or
+        # hydro-click payloads containing PINNED_REPO
+        if not pinned:
+            for repo_match in re.finditer(
+                r'href="/([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)"[^>]*"Link[^"]*"', html
+            ):
+                full = repo_match.group(1)
+                # Skip profile, settings, tabs, org pages
+                parts = full.split("/")
+                if len(parts) == 2 and parts[0] != username and parts[1] not in (
+                    "followers", "following", "stars", "achievements",
+                    "repositories", "projects"
+                ):
+                    pinned.append(full)
+        
+        # Method 3 (old fallback): JSON pinnedItems in script tags
+        if not pinned:
+            for script_match in re.finditer(r'"pinnedItems.*?"items"\s*:\s*\[(.*?)\]', html, re.DOTALL):
+                block = script_match.group(1)
+                for repo_match in re.finditer(r'"nameWithOwner"\s*:\s*"([^"]+)"', block):
+                    pinned.append(repo_match.group(1))
+        
+        # Deduplicate
+        seen = set()
+        unique = []
+        for p in pinned:
+            if p not in seen:
+                seen.add(p)
+                unique.append(p)
+        return unique
+    except Exception:
+        return []
+
+
+def format_number(n):
+    """Format a number with commas."""
+    return f"{n:,}" if n else "0"
+
+
+def generate_markdown(username, user, repos, pinned, include_repos):
+    """Generate the markdown output."""
+    lines = []
+    
+    # Title
+    display_name = user.get("name") or username
+    lines.append(f"# {display_name} ({user.get('login', username)})")
+    lines.append("")
+    
+    # Profile badge line
+    if user.get("type") == "Organization":
+        lines.append("*Organization*")
+    else:
+        lines.append("*User*")
+    lines.append("")
+    
+    # Bio
+    bio = user.get("bio")
+    if bio:
+        lines.append(f"**Bio:** {bio}")
+        lines.append("")
+    
+    # Key info
+    lines.append("## Profile")
+    lines.append("")
+    info_items = []
+    if user.get("company"):
+        info_items.append(f"- Company: {user.get('company')}")
+    if user.get("location"):
+        info_items.append(f"- Location: {user.get('location')}")
+    if user.get("blog"):
+        blog = user.get("blog")
+        if not blog.startswith("http"):
+            blog = "https://" + blog
+        info_items.append(f"- Blog: {blog}")
+    if user.get("twitter_username"):
+        info_items.append(f"- Twitter: @{user.get('twitter_username')}")
+    if user.get("email"):
+        info_items.append(f"- Email: {user.get('email')}")
+    info_items.append(f"- GitHub: {user.get('html_url', f'https://github.com/{username}')}")
+    if user.get("created_at"):
+        created = user.get("created_at")[:10]
+        info_items.append(f"- Member since: {created}")
+    lines.extend(info_items)
+    lines.append("")
+    
+    # Stats
+    lines.append("## Stats")
+    lines.append("")
+    stats = [
+        f"- Public repos: {format_number(user.get('public_repos', 0))}",
+        f"- Public gists: {format_number(user.get('public_gists', 0))}",
+        f"- Followers: {format_number(user.get('followers', 0))}",
+        f"- Following: {format_number(user.get('following', 0))}",
+    ]
+    
+    if repos:
+        total_stars = sum(r.get("stargazers_count", 0) for r in repos)
+        total_forks = sum(r.get("forks_count", 0) for r in repos)
+        stats.append(f"- Total stars: {format_number(total_stars)}")
+        stats.append(f"- Total forks: {format_number(total_forks)}")
+    
+    lines.extend(stats)
+    lines.append("")
+    
+    # Languages
+    if repos:
+        lang_counter = Counter()
+        for r in repos:
+            lang = r.get("language")
+            if lang:
+                lang_counter[lang] += 1
+        
+        if lang_counter:
+            lines.append("## Top Languages")
+            lines.append("")
+            total = sum(lang_counter.values())
+            for lang, count in lang_counter.most_common(10):
+                pct = (count / total) * 100
+                lines.append(f"- {lang}: {count} repos ({pct:.0f}%)")
+            lines.append("")
+    
+    # Pinned repos
+    if pinned:
+        lines.append("## Pinned Repos")
+        lines.append("")
+        for repo_full in pinned:
+            parts = repo_full.split("/")
+            if len(parts) == 2:
+                owner, name = parts
+                lines.append(f"- [{repo_full}](https://github.com/{repo_full})")
+            else:
+                lines.append(f"- {repo_full}")
+        lines.append("")
+    
+    # Top repos (optional)
+    if include_repos and repos:
+        sorted_repos = sorted(repos, key=lambda r: r.get("stargazers_count", 0), reverse=True)
+        top_repos = sorted_repos[:20]
+        
+        lines.append("## Top Repos (by stars)")
+        lines.append("")
+        for r in top_repos:
+            name = r.get("name", "unknown")
+            stars = r.get("stargazers_count", 0)
+            forks = r.get("forks_count", 0)
+            lang = r.get("language") or "N/A"
+            desc = r.get("description") or ""
+            fork = " (fork)" if r.get("fork") else ""
+            archived = " (archived)" if r.get("archived") else ""
+            url = r.get("html_url", f"https://github.com/{username}/{name}")
+            
+            lines.append(f"### [{name}]({url}){fork}{archived}")
+            lines.append("")
+            lines.append(f"- Language: {lang}")
+            lines.append(f"- Stars: {format_number(stars)}")
+            lines.append(f"- Forks: {format_number(forks)}")
+            if desc:
+                lines.append(f"- Description: {desc}")
+            lines.append("")
+    
+    # Generated timestamp
+    lines.append("---")
+    lines.append(f"*Generated by github-profile-info on {datetime.now().strftime('%Y-%m-%d %H:%M UTC')}*")
+    lines.append("")
+    
+    return "\n".join(lines)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="Generate a markdown info file for any GitHub profile.",
+        prog="github-profile-info",
+    )
+    parser.add_argument("username", help="GitHub username or organization")
+    parser.add_argument("--output", "-o", help="Output file path (default: ./<username>-profile-info.md)")
+    parser.add_argument("--repos", action="store_true", help="Include detailed top 20 repos by stars")
+    parser.add_argument("--no-pinned", action="store_true", help="Skip fetching pinned repos (faster)")
+    args = parser.parse_args()
+    
+    username = args.username.strip().lstrip("@")
+    
+    print(f"Fetching profile for @{username}...", file=sys.stderr)
+    user = fetch_user(username)
+    
+    print(f"Fetching repos...", file=sys.stderr)
+    repos = fetch_repos(username)
+    
+    pinned = []
+    if not args.no_pinned:
+        print(f"Fetching pinned repos...", file=sys.stderr)
+        pinned = fetch_pinned(username)
+    
+    print(f"Generating markdown...", file=sys.stderr)
+    md = generate_markdown(username, user, repos, pinned, args.repos)
+    
+    output_path = args.output or f"./{username}-profile-info.md"
+    with open(output_path, "w") as f:
+        f.write(md)
+    
+    print(f"Written to {output_path}", file=sys.stderr)
+    print(f"Profile: {user.get('html_url', f'https://github.com/{username}')}", file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()
