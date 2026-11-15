@@ -69,7 +69,7 @@ python3 mds.py build <content_dir> <output_dir>
 ```
 
 - `content_dir`: Directory containing your `.md` files
-- `output_dir`: Directory where HTML files get written (created if missing, cleaned if it exists)
+- `output_dir`: Directory where HTML files get written (created if missing, cleaned if it exists). It must not be the same as, inside, or contain `content_dir`; the build stops without deleting content when those paths overlap.
 
 Options:
 
@@ -206,10 +206,18 @@ done
 
 Or add it to a CI pipeline that builds and deploys on every push.
 
+## Tests
+
+Run the tool tests from this directory:
+
+```bash
+python3 -m unittest -v test_mds
+```
+
 ## Why another static site generator?
 
 Most static site generators need Node.js, Ruby, or a long list of Python packages. Sometimes you just want a script that reads some markdown and writes some HTML. That is all this is.
 
 ## License
 
-AGPL-3.0. See the [root license](../../LICENSE).
+This copy is licensed under AGPL-3.0. See the [root license](../../LICENSE). Earlier standalone releases remain available under their original MIT terms.

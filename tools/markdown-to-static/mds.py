@@ -321,6 +321,15 @@ def build_site(content_dir, output_dir, template_str=None, index_template_str=No
         print(f"Error: content directory '{content_dir}' not found.", file=sys.stderr)
         sys.exit(1)
 
+    resolved_content = content_path.resolve()
+    resolved_output = output_path.resolve()
+    if (
+        resolved_content == resolved_output
+        or resolved_content in resolved_output.parents
+        or resolved_output in resolved_content.parents
+    ):
+        raise ValueError("Output directory must not contain or be inside the content directory.")
+
     # Clean and create output directory
     if output_path.exists():
         shutil.rmtree(output_path)

@@ -44,7 +44,7 @@ Follow the README in the selected directory. Read the options before running com
 - [`llm-bench-lite`](tools/llm-bench-lite). Measures time to first token, tokens per second, and request latency for OpenAI-compatible APIs.
 - [`log-rotator`](tools/log-rotator). Rotates, compresses, and prunes local log files by size, count, and age.
 - [`log-shark`](tools/log-shark). Summarizes syslog, journalctl JSON, Nginx, and Apache logs, including errors, client addresses, and HTTP status codes.
-- [`markdown-to-static`](tools/markdown-to-static). Converts Markdown files to HTML using a template and writes them to a build directory.
+- [`markdown-to-static`](tools/markdown-to-static). Converts Markdown files to HTML using a template and writes them to a build directory. Rejects overlapping content and output paths to prevent deleting source files.
 - [`mem-sentinel`](tools/mem-sentinel). Reads Linux memory and swap usage from /proc/meminfo and reports configurable threshold breaches.
 - [`net-pulse`](tools/net-pulse). Checks connection latency, DNS resolution, HTTP reachability, and download throughput, with an optional HTML report.
 - [`nim-api-watchdog`](tools/nim-api-watchdog). Checks NVIDIA NIM availability and reports recovery so interrupted Hermes Agent tasks can resume.
