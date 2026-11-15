@@ -351,7 +351,11 @@ def main():
     print(f"Critical issues: {total_issues}")
     print(f"Warnings: {total_warnings}")
     
-    # Write JSON report
+    # Keep a newly created report directory private, regardless of umask.
+    # mkdir does not alter permissions when the directory already exists.
+    report_dir = Path(REPORT_PATH).parent
+    report_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+
     with open(REPORT_PATH, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\n[*] JSON report written to: {REPORT_PATH}")
