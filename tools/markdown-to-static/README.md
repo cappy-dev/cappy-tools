@@ -220,4 +220,4 @@ Most static site generators need Node.js, Ruby, or a long list of Python package
 
 ## License
 
-This copy is licensed under AGPL-3.0. See the [root license](../../LICENSE). Earlier standalone releases remain available under their original MIT terms.
+This copy is licensed under AGPL-3.0. See the [root license](../../LICENSE). Earlier standalone versions retain their original MIT terms.
