@@ -73,4 +73,4 @@ Run `python3 scripts/check_tools.py` to check documentation links, license place
 
 ## License
 
-The current monorepo is licensed under AGPL-3.0. See [LICENSE](LICENSE) for the complete text. Existing package metadata that permits later AGPL versions still applies. Earlier standalone releases keep their original license terms.
+The current monorepo is licensed under AGPL-3.0. See [LICENSE](LICENSE) for the complete text. Existing package metadata that permits later AGPL versions still applies. Earlier standalone releases keep their original license terms. See [previous license notices](PREVIOUS-LICENSES.md).
