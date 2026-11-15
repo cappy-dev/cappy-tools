@@ -47,10 +47,14 @@
   {
     "name": "llm-bench-lite",
     "destination": "tools/llm-bench-lite",
-    "source_commit": "3daf8dba8e397de22d82f7be4b94564bfc68a363",
+    "source_commit": "0354956ce2a9ea61ceaf4de0b414b207da0b453e",
     "source_branch": "main",
-    "source_tree": "d8cbe8da6a48eb9a3c34734301850389d6a5a61f",
-    "empty": false
+    "source_tree": "e27d9712bc258f7ed1a220542d4d510ae28a714c",
+    "empty": false,
+    "source_sha256": {
+      "llm_bench_lite.py": "078fec028cc8dc4c90fbd951e30b73379fd9e432de05c9f51863a1d61dd2fcfd",
+      "test_streaming_utf8.py": "e3e3faa483b1e243869f03c0f5c01d8ffdd0a3463d5296882ddc246639048892"
+    }
   },
   {
     "name": "markdown-to-static",
@@ -88,10 +92,14 @@
   {
     "name": "ssh-key-audit",
     "destination": "tools/ssh-key-audit",
-    "source_commit": "0b8b114e03e6dac61641fa0b0c06a36761f715bd",
+    "source_commit": "d54caa42404d8392d7743a9374e78a4f3e5806da",
     "source_branch": "master",
-    "source_tree": "29c89867c75b63ea627ebfa332169c73c49e752f",
-    "empty": false
+    "source_tree": "9dfd54da7a6b36e9f35fcbc7dae787cd04b1d592",
+    "empty": false,
+    "source_sha256": {
+      "ssh-key-audit.py": "1db594bf9c47251a06cf606dd28290c51b00c21d8725885befa3080dd9c3924f",
+      "test_report_directory.py": "ea9d1aaa3bca3a03a4fe5afd4597396a1425ec1c719eefa8d56a21ea8bae2b96"
+    }
   },
   {
     "name": "ssh-quick-setup",

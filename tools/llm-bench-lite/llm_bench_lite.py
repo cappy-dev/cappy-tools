@@ -7,6 +7,7 @@ the Python standard library.
 """
 
 import argparse
+import codecs
 import json
 import sys
 import time
@@ -139,8 +140,10 @@ def chat_completion(base_url, api_key, model, prompt, max_tokens, temperature):
         t_start = time.perf_counter()
         with urllib.request.urlopen(req, timeout=120) as resp:
             buffer = ""
-            for chunk in iter(lambda: resp.read(1), b""):
-                buffer += chunk.decode("utf-8", errors="replace")
+            decoder = codecs.getincrementaldecoder("utf-8")()
+            read_chunk = getattr(resp, "read1", resp.read)
+            for chunk in iter(lambda: read_chunk(4096), b""):
+                buffer += decoder.decode(chunk)
                 while "\n" in buffer:
                     line, buffer = buffer.split("\n", 1)
                     line = line.strip()

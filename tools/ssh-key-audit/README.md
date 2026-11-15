@@ -88,4 +88,4 @@ Security notes
 
 ## License
 
-AGPL-3.0. See the [root license](../../LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE). Earlier standalone versions retain their original MIT terms.
