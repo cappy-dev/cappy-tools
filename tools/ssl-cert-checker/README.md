@@ -144,6 +144,10 @@ chain verification are intentionally disabled so the report still tells you the
 real expiry date. This is a reporting tool, not a hardening audit. For full chain
 validation use a dedicated scanner like `testssl.sh` or `sslyze`.
 
+## Source history
+
+The root `migrations.json` records the imported standalone source snapshot. Its commit may not be an ancestor of this repository history.
+
 ## License
 
-AGPL-3.0. See the [root license](../../LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE). Earlier standalone releases remain under MIT.

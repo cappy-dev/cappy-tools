@@ -7,9 +7,9 @@
   {
     "name": "dns-torch",
     "destination": "tools/dns-torch",
-    "source_commit": "80fc6aba15257e5fd1b53d6dce8060a97d91cff5",
+    "source_commit": "1eaa2589b653376de51a3ca7e4b467fdbd05dcf2",
     "source_branch": "main",
-    "source_tree": "ea0d564c0f5afa0bcb6574c80daf6746472553ce",
+    "source_tree": "b512de83aee2951be032e523d43f7baf1d7b65eb",
     "empty": false
   },
   {
@@ -104,9 +104,9 @@
   {
     "name": "ssl-cert-checker",
     "destination": "tools/ssl-cert-checker",
-    "source_commit": "c9def66d44ad597fba78a5e0e12238b3e4450014",
+    "source_commit": "b32f4d0f5a22776e7890dddf31d6570d0d5c218e",
     "source_branch": "main",
-    "source_tree": "3ec05312e07a4ce185e5a65a1b066013364265e0",
+    "source_tree": "4dc0506b7c95bed1fbd6a6d8ef181d8fd4a1fc56",
     "empty": false
   }
 ]

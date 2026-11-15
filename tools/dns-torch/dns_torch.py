@@ -8,6 +8,8 @@ Requires: Python 3.9+ (no pip packages needed)
 """
 
 import argparse
+import contextlib
+import io
 import json
 import socket
 import ssl
@@ -537,11 +539,12 @@ def main() -> None:
     if args.no_color or not sys.stdout.isatty():
         NO_COLOR = True
 
-    results = diagnose(domain, args)
-
     if args.json:
-        # Remove non-serializable items
+        with contextlib.redirect_stdout(io.StringIO()):
+            results = diagnose(domain, args)
         print(json.dumps(results, indent=2, default=str))
+    else:
+        diagnose(domain, args)
 
 
 if __name__ == "__main__":
