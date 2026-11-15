@@ -1,4 +1,6 @@
+import contextlib
 import importlib.util
+import io
 import sys
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -36,6 +38,27 @@ class CertificateExpiryMessageTests(unittest.TestCase):
         self.assertEqual(result.status, "expired")
         self.assertEqual(result.days_remaining, -1)
         self.assertEqual(result.message, "Certificate expired 0 day(s) ago.")
+
+
+class MainExitStatusTests(unittest.TestCase):
+    def test_not_yet_valid_certificate_exits_with_warning(self):
+        result = ssl_cert_checker.CertResult(
+            host="future.example",
+            port=443,
+            status="warning",
+            subject="CN=future.example",
+            issuer="CN=Test CA",
+            not_before="2099-01-01T00:00:00Z",
+            not_after="2099-12-31T00:00:00Z",
+            days_remaining=36500,
+            message="Certificate is not yet valid (starts in the future).",
+        )
+
+        with patch.object(ssl_cert_checker, "check_host", return_value=result):
+            with contextlib.redirect_stdout(io.StringIO()):
+                exit_code = ssl_cert_checker.main(["future.example"])
+
+        self.assertEqual(exit_code, 1)
 
 
 if __name__ == "__main__":

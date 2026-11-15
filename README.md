@@ -69,8 +69,8 @@ Follow the README in the selected directory. Read the options before running com
 
 Run `python3 scripts/check_tools.py` to check documentation links, license placement, and Python and shell syntax. Tool-specific tests and usage examples stay in their directories.
 
-The migrated repositories retain their original commit ancestry. `migrations.json` records the source commits.
+`migrations.json` records the standalone source snapshot represented by each migrated tool. A recorded source commit provides provenance and may not be an ancestor of this repository history.
 
 ## License
 
-AGPL-3.0. See [LICENSE](LICENSE) for the complete text. Existing package metadata that permits later AGPL versions still applies. Earlier releases keep their original license terms.
+The current monorepo is licensed under AGPL-3.0. See [LICENSE](LICENSE) for the complete text. Existing package metadata that permits later AGPL versions still applies. Earlier standalone releases keep their original license terms.

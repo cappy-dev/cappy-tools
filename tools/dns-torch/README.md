@@ -134,6 +134,10 @@ answers fast. The only external tool it calls is `dig`, which is already
 present on nearly every Linux server. Everything else comes from the Python
 standard library, so there is nothing to install and nothing to break.
 
+## Source history
+
+The root `migrations.json` records the imported standalone source snapshot. Its commit may not be an ancestor of this repository history.
+
 ## License
 
-AGPL-3.0. See the [root license](../../LICENSE).
+AGPL-3.0. See the [root license](../../LICENSE). Earlier standalone releases remain under MIT.
