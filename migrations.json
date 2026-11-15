@@ -55,9 +55,18 @@
   {
     "name": "markdown-to-static",
     "destination": "tools/markdown-to-static",
-    "source_commit": "92b666a574c78f6f67e90f3d86c3031a9f858a61",
+    "source_commit": "53a3cf1a9b3ce3ed4e1a3ebbf14d81c3c5be0242",
     "source_branch": "main",
-    "source_tree": "f223f05ee7c352487542923ae1661cfed362c1e0",
+    "source_tree": "bfd60f81405b32f8aa5cf50ef832587b3895b99f",
+    "source_prs": [
+      {
+        "number": 1,
+        "state": "MERGED",
+        "merge_commit": "53a3cf1a9b3ce3ed4e1a3ebbf14d81c3c5be0242",
+        "head_commit": "c6287775c08985f88f517191ce33aec6c2861d5b",
+        "merge_method": "squash"
+      }
+    ],
     "empty": false
   },
   {
