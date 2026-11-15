@@ -38,11 +38,11 @@ import urllib.request
 import urllib.error
 
 # --- Configurable constants ---
-STATE_FILE = "/tmp/nim_watchdog_state.json"
-TASK_FILE = "/tmp/nim_active_task.txt"
+STATE_FILE = os.environ.get("STATE_FILE", "/tmp/nim_watchdog_state.json")
+TASK_FILE = os.environ.get("TASK_FILE", "/tmp/nim_active_task.txt")
 BASE_URL = "https://integrate.api.nvidia.com/v1"
 MODEL = ""  # e.g. "z-ai/glm-5.1" — set via NIM_MODEL env var or leave empty for default
-TIMEOUT = 15
+TIMEOUT = int(os.environ.get("TIMEOUT", "15"))
 ENV_KEY_NAME = "NVIDIA_API_KEY"
 ENV_FILE_PATH = os.path.expanduser("~/.hermes/.env")
 

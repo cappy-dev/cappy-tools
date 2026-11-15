@@ -65,14 +65,26 @@ rm /tmp/nim_active_task.txt
 | Variable | Default | Description |
 |---|---|---|
 | `NVIDIA_API_KEY` | _(required)_ | Your NIM API key |
-| `NIM_MODEL` | `z-ai/glm-5.1` | Model to ping (override via env var) |
+| `NIM_MODEL` | `z-ai/glm-5.1` | Model to ping |
 | `STATE_FILE` | `/tmp/nim_watchdog_state.json` | Where to track up/down state |
 | `TASK_FILE` | `/tmp/nim_active_task.txt` | Active task description |
 | `TIMEOUT` | `15` | Request timeout in seconds |
 
 ## Token Cost
 
-Each check uses 1 completion token. On NIM's free tier (1,000 credits/month, 1 credit = 1,000 tokens), running this every hour costs ~0.72 credits/month. Negligible.
+Each check uses 1 completion token. On NIM's free tier (1,000 credits/month, 1 credit = 1,000 tokens), running this every hour costs ~0.72 credits/month.
+
+## Tests
+
+Run the configuration test from this directory:
+
+```bash
+python3 -m unittest test_nim_watchdog.py
+```
+
+## Source
+
+The source commit and tree are recorded in `migrations.json`.
 
 ## License
 

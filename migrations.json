@@ -72,9 +72,9 @@
   {
     "name": "nim-api-watchdog",
     "destination": "tools/nim-api-watchdog",
-    "source_commit": "4a33a17028af6520d728fccd2cb7e1289c335ea9",
+    "source_commit": "ef37b34e0311de606d6efa2e6409d204288255fb",
     "source_branch": "master",
-    "source_tree": "89b833204e297c01a32f23b2bf03efca236cc4d5",
+    "source_tree": "df19c036ddfadc8abd7c88a154f88c3b1fd2dc5d",
     "empty": false
   },
   {
