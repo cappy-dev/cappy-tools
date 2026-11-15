@@ -133,7 +133,8 @@ def _result_from_cert(base: CertResult, cert: dict) -> CertResult:
 
     if now > not_after:
         status = "expired"
-        message = f"Certificate expired {-days_remaining} day(s) ago."
+        elapsed_days = int((now - not_after) // 86400)
+        message = f"Certificate expired {elapsed_days} day(s) ago."
     elif now < not_before:
         status = "warning"
         message = "Certificate is not yet valid (starts in the future)."

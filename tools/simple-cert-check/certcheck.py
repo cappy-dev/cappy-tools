@@ -202,6 +202,27 @@ def format_result(result):
     return colorize(line, "32")
 
 
+def parse_host_port(entry, default_port):
+    """Split a hostname or IP literal from an optional port."""
+    if entry.startswith("["):
+        closing = entry.find("]")
+        if closing == -1:
+            raise ValueError("unclosed bracket in host: %s" % entry)
+        host = entry[1:closing]
+        suffix = entry[closing + 1:]
+        if suffix:
+            if not suffix.startswith(":") or not suffix[1:].isdigit():
+                raise ValueError("invalid port in host: %s" % entry)
+            return host, int(suffix[1:])
+        return host, default_port
+
+    if entry.count(":") == 1:
+        host, port_str = entry.rsplit(":", 1)
+        if port_str.isdigit():
+            return host, int(port_str)
+    return entry, default_port
+
+
 def main():
     parser = argparse.ArgumentParser(
         prog="certcheck.py",
@@ -236,13 +257,7 @@ def main():
 
     now = datetime.now(timezone.utc)
 
-    targets = []
-    for entry in args.hosts:
-        if ":" in entry and entry.rsplit(":", 1)[1].isdigit():
-            host, port_str = entry.rsplit(":", 1)
-            targets.append((host.strip(), int(port_str)))
-        else:
-            targets.append((entry.strip(), args.port))
+    targets = [parse_host_port(entry.strip(), args.port) for entry in args.hosts]
 
     results = []
     for host, port in targets:
