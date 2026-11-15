@@ -35,6 +35,7 @@ Follow the README in the selected directory. Read the options before running com
 - [`git-backup-lite`](tools/git-backup-lite). Backs up local Git repositories with git bundle and copies bare repositories into timestamped backup runs.
 - [`git-repo-sweeper`](tools/git-repo-sweeper). Reports uncommitted changes, unpushed commits, and stale branches across local Git repositories.
 - [`git-snapshot`](tools/git-snapshot). Creates timestamped tar archives of Git repositories, including the branch and commit in the filename.
+- [`github-profile-info`](tools/github-profile-info). Generates a Markdown summary of a public GitHub user or organization. Uses Python's standard library.
 - [`homelab-backup-rotator`](tools/homelab-backup-rotator). Prunes backup files by glob pattern and retention count. Run with --dry-run before allowing deletion.
 - [`homelab-ports`](tools/homelab-ports). Scans selected TCP ports and labels common self-hosted services. Scan only systems you own or have permission to test.
 - [`homelab-status`](tools/homelab-status). Checks HTTP endpoints and TCP ports, then writes a self-contained HTML status page.
