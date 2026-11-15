@@ -185,9 +185,12 @@ def parse_field(raw: str, spec: FieldSpec) -> set[int]:
                 )
 
         if lo > hi:
-            # Wrapped ranges cross the field boundary, such as 22-2 for hours.
-            values.update(range(lo, upper + 1, step))
-            values.update(range(spec.min_value, hi + 1, step))
+            field_size = upper - spec.min_value + 1
+            distance = upper - lo + 1 + hi - spec.min_value
+            values.update(
+                spec.min_value + (lo - spec.min_value + offset) % field_size
+                for offset in range(0, distance + 1, step)
+            )
         else:
             values.update(range(lo, hi + 1, step))
 
