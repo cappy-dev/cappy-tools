@@ -9,6 +9,31 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def markdown_anchors(text):
+    anchors = set(re.findall(r'<(?:a|h[1-6])\b[^>]*\bid=["\']([^"\']+)', text, re.I))
+    counts = {}
+    for heading in re.findall(r"^#{1,6}\s+(.+?)\s*#*\s*$", text, re.M):
+        heading = re.sub(r"`([^`]*)`", r"\1", heading)
+        heading = re.sub(r"\[([^]]+)\]\([^)]*\)", r"\1", heading)
+        heading = re.sub(r"<[^>]+>", "", heading).lower()
+        slug = re.sub(r"[^\w -]", "", heading)
+        slug = re.sub(r"\s+", "-", slug.strip())
+        count = counts.get(slug, 0)
+        counts[slug] = count + 1
+        anchors.add(slug if count == 0 else f"{slug}-{count}")
+    return anchors
+
+
+def missing_markdown_anchor(source, link):
+    target = urlsplit(link)
+    if target.scheme or target.netloc or not target.fragment:
+        return False
+    destination = source.parent / unquote(target.path) if target.path else source
+    if destination.suffix.lower() != ".md" or not destination.is_file():
+        return False
+    return unquote(target.fragment) not in markdown_anchors(destination.read_text())
+
+
 def main():
     errors = []
     tools = sorted(path for path in (ROOT / "tools").iterdir() if path.is_dir())
@@ -52,10 +77,13 @@ def main():
             text = re.sub(r"`[^`]*`", "", text)
             for link in re.findall(r"\[[^\]]*\]\(([^)]+)\)", text):
                 target = urlsplit(link)
-                if target.scheme or target.netloc or not target.path:
+                if target.scheme or target.netloc or not (target.path or target.fragment):
                     continue
-                if not (path.parent / unquote(target.path)).exists():
+                destination = path.parent / unquote(target.path) if target.path else path
+                if not destination.exists():
                     errors.append(f"{path.relative_to(ROOT)}: missing {link}")
+                elif missing_markdown_anchor(path, link):
+                    errors.append(f"{path.relative_to(ROOT)}: missing anchor in {link}")
     for error in errors:
         print(error)
     print(f"Checked {len(tools)} tool directories, {python_files} Python files, and {shell_files} shell files; {len(errors)} errors.")
